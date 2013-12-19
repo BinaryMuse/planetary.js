@@ -1,0 +1,40 @@
+<!doctype html>
+<html>
+<head>
+  <title>Planetary.js</title>
+  <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Open+Sans:300italic,400,300,700' rel='stylesheet' type='text/css'>
+  <link type="text/css" rel="stylesheet" href="semantic/css/semantic.min.css">
+  <link type="text/css" rel="stylesheet" href="css/planetaryjs.css">
+  <script type='text/javascript' src="js/d3.v3.min.js"></script>
+  <script type='text/javascript' src="js/topojson.v1.min.js"></script>
+
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+</head>
+<body>
+  <div class='ui fixed inverted large menu main-menu'>
+    <a class='item title' href='index.html'>
+      <i class='globe icon'></i>Planetary.js
+    </a>
+    <span class='spacer hide-on-mobile'></span>
+    <a class='item minor' href='download.html'>
+      <i class='download icon'></i><span class='hide-on-mobile'>Download</span>
+    </a>
+    <a class='item minor' href='examples.html'>
+      <i class='laptop icon'></i><span class='hide-on-mobile'>Examples</span>
+    </a>
+    <a class='item minor' href='examples.html'>
+      <i class='book icon'></i><span class='hide-on-mobile'>Documentation</span>
+    </a>
+    <a class='item minor' href='https://github.com/BinaryMuse'>
+      <i class='github alternate icon'></i><span class='hide-on-mobile'>Fork on GitHub</span>
+    </a>
+  </div>
+
+  <div class='content container'>
+    <%- yield %>
+  </div>
+  <script type="text/javascript" src="js/planetaryjs.js"></script>
+</body>
+</html>

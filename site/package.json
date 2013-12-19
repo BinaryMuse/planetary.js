@@ -1,0 +1,18 @@
+{
+  "name": "planetaryjs-site",
+  "version": "0.0.0",
+  "description": "Web site for Planetary.js",
+  "main": "index.js",
+  "homepage": "http://planetaryjs.com",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "harp server",
+    "compile": "harp compile"
+  },
+  "author": "Brandon Tilley <brandon@brandontilley.com>",
+  "license": "MIT",
+  "private": true,
+  "dependencies": {
+    "harp": "~0.10.1"
+  }
+}
