@@ -69,7 +69,7 @@ d3.json("world-110m.json", function(error, world) {
       path.context(context)(borders);
       context.stroke();
       context.strokeStyle = '#fff';
-      context.lineWidth = 2;
+      context.lineWidth = 1;
       currentTime = Date.now();
       for (_i = 0, _len = pings.length; _i < _len; _i++) {
         ping = pings[_i];
