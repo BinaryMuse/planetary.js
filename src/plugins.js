@@ -1,93 +1,150 @@
-  planetaryjs.plugins.topojson = function(planet, config) {
-    planet.onInit(function(done) {
-      if (config.world) {
-        planet.world = config.world;
-        setTimeout(done, 0);
-      } else {
-        var file = config.file || 'world-110m.json'
-        d3.json(file, function(err, world) {
-          if (err) {
-            throw new Error("Could not load JSON " + file);
-          }
-          planet.world = world;
-          done();
-        });
-      }
-    })
-  };
-
-  planetaryjs.plugins.oceans = function(planet, config) {
-    planet.onDraw(function() {
-      planet.withSavedContext(function(context) {
-        context.beginPath();
-        planet.path.context(context)({type: 'Sphere'});
-
-        context.fillStyle = config.fill || 'black';
-        context.fill();
-
-        if (config.stroke != false) {
-          context.strokeStyle = config.stroke;
-          context.stroke();
+  planetaryjs.plugins.topojson = function(config) {
+    return function(planet) {
+      planet.onInit(function(done) {
+        if (config.world) {
+          planet.world = config.world;
+          setTimeout(done, 0);
+        } else {
+          var file = config.file || 'world-110m.json'
+          d3.json(file, function(err, world) {
+            if (err) {
+              throw new Error("Could not load JSON " + file);
+            }
+            planet.world = world;
+            done();
+          });
         }
       });
-    });
+    };
   };
 
-  planetaryjs.plugins.land = function(planet, config) {
-    var land = null;
+  planetaryjs.plugins.oceans = function(config) {
+    return function(planet) {
+      planet.onDraw(function() {
+        planet.withSavedContext(function(context) {
+          context.beginPath();
+          planet.path.context(context)({type: 'Sphere'});
 
-    planet.onInit(function() {
-      land = topojson.feature(planet.world, planet.world.objects.land);
-    })
-
-    planet.onDraw(function() {
-      planet.withSavedContext(function(context) {
-        context.beginPath();
-        planet.path.context(context)(land);
-
-        if (config.fill != false) {
-          context.fillStyle = config.fill || 'white';
+          context.fillStyle = config.fill || 'black';
           context.fill();
-        }
 
-        if (config.stroke) {
-          context.strokeStyle = config.stroke;
+          if (config.stroke != false) {
+            context.strokeStyle = config.stroke;
+            context.stroke();
+          }
+        });
+      });
+    };
+  };
+
+  planetaryjs.plugins.land = function(config) {
+    return function(planet) {
+      var land = null;
+
+      planet.onInit(function() {
+        land = topojson.feature(planet.world, planet.world.objects.land);
+      })
+
+      planet.onDraw(function() {
+        planet.withSavedContext(function(context) {
+          context.beginPath();
+          planet.path.context(context)(land);
+
+          if (config.fill != false) {
+            context.fillStyle = config.fill || 'white';
+            context.fill();
+          }
+
+          if (config.stroke) {
+            context.strokeStyle = config.stroke;
+            context.stroke();
+          }
+        });
+      });
+    };
+  };
+
+  planetaryjs.plugins.borders = function(config) {
+    return function(planet) {
+      var borders = null;
+      planet.onInit(function() {
+        var countries = planet.world.objects.countries;
+        borders = topojson.mesh(planet.world, countries, function(a, b) {
+          return a.id !== b.id;
+        });
+      });
+
+      planet.onDraw(function() {
+        planet.withSavedContext(function(context) {
+          context.beginPath();
+          planet.path.context(context)(borders);
+          context.strokeStyle = config.stroke || 'gray';
           context.stroke();
+        });
+      });
+    };
+  };
+
+  planetaryjs.plugins.earth = function(config) {
+    var config = config || {};
+    var topojsonOptions = config.topojson || {};
+    var oceanOptions = config.oceans || {};
+    var landOptions = config.land || {};
+    var bordersOptions = config.borders || {};
+
+    return function(planet) {
+      planetaryjs.plugins.topojson(topojsonOptions)(planet);
+      planetaryjs.plugins.oceans(oceanOptions)(planet);
+      planetaryjs.plugins.land(landOptions)(planet);
+      planetaryjs.plugins.borders(bordersOptions)(planet);
+    };
+  };
+
+  planetaryjs.plugins.pings = function(config) {
+    var pings = [];
+
+    var addPing = function(lat, lng, options) {
+      var options = options || {};
+      options.color = options.color || 'white';
+      options.ttl = options.ttl || 2000;
+      options.size = options.size || 500;
+      pings.push({ lat: lat, lng: lng, time: new Date(), options: options });
+    };
+
+    var drawPings = function(planet, context, now) {
+      var newPings = [];
+      for (var i = 0; i < pings.length; i++) {
+        var ping = pings[i];
+        var alive = now - ping.time;
+        if (alive <= ping.options.ttl) {
+          newPings.push(ping);
+          drawPing(planet, context, now, ping);
         }
+      }
+      pings = newPings;
+    };
+
+    var drawPing = function(planet, context, now, ping) {
+      var dT = now - ping.time;
+      var alpha = 1 - (dT / ping.options.ttl);
+      var color = d3.rgb(ping.options.color);
+      color = "rgba(" + color.r + "," + color.g + "," + color.b + "," + alpha + ")";
+      context.strokeStyle = color;
+      var circle = d3.geo.circle().origin([ping.lng, ping.lat])
+        .angle(dT / ping.options.size)();
+      context.beginPath();
+      planet.path.context(context)(circle);
+      context.stroke();
+    };
+
+    return function (planet) {
+      planet.addPing = addPing;
+
+      planet.onDraw(function() {
+        var now = new Date();
+        planet.withSavedContext(function(context) {
+          drawPings(planet, context, now);
+        });
       });
-    });
-  };
-
-  planetaryjs.plugins.borders = function(planet, config) {
-    var borders = null;
-    planet.onInit(function() {
-      var countries = planet.world.objects.countries;
-      borders = topojson.mesh(planet.world, countries, function(a, b) {
-        return a.id !== b.id;
-      });
-    });
-
-    planet.onDraw(function() {
-      planet.withSavedContext(function(context) {
-        context.beginPath();
-        planet.path.context(context)(borders);
-        context.strokeStyle = config.stroke || 'gray';
-        context.stroke();
-      });
-    });
-  };
-
-  planetaryjs.plugins.earth = function(options) {
-    var options = options || {};
-    var topojsonOptions = options.topojson || {};
-    var oceanOptions = options.oceans || {};
-    var landOptions = options.land || {};
-    var bordersOptions = options.borders || {};
-
-    return function(planet, options) {
-      planetaryjs.plugins.topojson(planet, topojsonOptions);
-      planetaryjs.plugins.oceans(planet, oceanOptions);
-      planetaryjs.plugins.land(planet, landOptions);
-      planetaryjs.plugins.borders(planet, bordersOptions);
     };
   };

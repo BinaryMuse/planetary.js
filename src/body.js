@@ -11,24 +11,28 @@
     });
   };
 
-  var startDraw = function(planet, canvas, localPlugins, hooks) {
+  var initPlugins = function(planet, localPlugins) {
+    // Add the global plugins to the beginning of the local ones
     for (var i = 0; i < plugins.length; i++) {
       localPlugins.unshift(plugins[i]);
     }
 
-    if (localPlugins.length == 0 && planetaryjs.plugins.earth) {
-      planet.loadPlugin(planetaryjs.plugins.earth());
+    // Load the default plugins if none have been loaded so far
+    if (localPlugins.length == 0) {
+      if (planetaryjs.plugins.earth)
+        planet.loadPlugin(planetaryjs.plugins.earth());
+      if (planetaryjs.plugins.pings)
+        planet.loadPlugin(planetaryjs.plugins.pings());
     }
 
     for (var i = 0; i < localPlugins.length; i++) {
-      var plugin = localPlugins[i][0];
-      var config = localPlugins[i][1];
-      plugin(planet, config);
+      localPlugins[i](planet);
     }
+  };
 
-    planet.canvas = canvas;
-    planet.context = canvas.getContext('2d');
-
+  var runOnInitHooks = function(planet, canvas, hooks) {
+    // onInit hooks can be asynchronous if they take a parameter;
+    // iterate through them one at a time
     if (hooks.onInit.length) {
       var completed = 0;
       var doNext = function(callback) {
@@ -54,6 +58,15 @@
     }
   };
 
+  var startDraw = function(planet, canvas, localPlugins, hooks) {
+    initPlugins(planet, localPlugins);
+
+    planet.canvas = canvas;
+    planet.context = canvas.getContext('2d');
+
+    runOnInitHooks(planet, canvas, hooks);
+  };
+
   var planetaryjs = {
     plugins: {},
 
@@ -62,8 +75,8 @@
       return planetaryjs;
     },
 
-    loadPlugin: function(plugin, defaultOptions) {
-      plugins.push([plugin, defaultOptions || {}]);
+    loadPlugin: function(plugin) {
+      plugins.push(plugin);
     },
 
     planet: function() {
@@ -86,8 +99,8 @@
           hooks.onDraw.push(fn);
         },
 
-        loadPlugin: function(plugin, defaultOptions) {
-          localPlugins.push([plugin, defaultOptions || {}]);
+        loadPlugin: function(plugin) {
+          localPlugins.push(plugin);
         },
 
         withSavedContext: function(fn) {

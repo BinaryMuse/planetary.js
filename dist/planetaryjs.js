@@ -2,7 +2,7 @@
  *  Copyright (c) 2013 Brandon Tilley
  *
  *  Released under the MIT license
- *  Date: 2013-12-21T08:56:22.909Z
+ *  Date: 2013-12-21T19:00:54.985Z
  */
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -28,24 +28,28 @@
     });
   };
 
-  var startDraw = function(planet, canvas, localPlugins, hooks) {
+  var initPlugins = function(planet, localPlugins) {
+    // Add the global plugins to the beginning of the local ones
     for (var i = 0; i < plugins.length; i++) {
       localPlugins.unshift(plugins[i]);
     }
 
-    if (localPlugins.length == 0 && planetaryjs.plugins.earth) {
-      planet.loadPlugin(planetaryjs.plugins.earth());
+    // Load the default plugins if none have been loaded so far
+    if (localPlugins.length == 0) {
+      if (planetaryjs.plugins.earth)
+        planet.loadPlugin(planetaryjs.plugins.earth());
+      if (planetaryjs.plugins.pings)
+        planet.loadPlugin(planetaryjs.plugins.pings());
     }
 
     for (var i = 0; i < localPlugins.length; i++) {
-      var plugin = localPlugins[i][0];
-      var config = localPlugins[i][1];
-      plugin(planet, config);
+      localPlugins[i](planet);
     }
+  };
 
-    planet.canvas = canvas;
-    planet.context = canvas.getContext('2d');
-
+  var runOnInitHooks = function(planet, canvas, hooks) {
+    // onInit hooks can be asynchronous if they take a parameter;
+    // iterate through them one at a time
     if (hooks.onInit.length) {
       var completed = 0;
       var doNext = function(callback) {
@@ -71,6 +75,15 @@
     }
   };
 
+  var startDraw = function(planet, canvas, localPlugins, hooks) {
+    initPlugins(planet, localPlugins);
+
+    planet.canvas = canvas;
+    planet.context = canvas.getContext('2d');
+
+    runOnInitHooks(planet, canvas, hooks);
+  };
+
   var planetaryjs = {
     plugins: {},
 
@@ -79,8 +92,8 @@
       return planetaryjs;
     },
 
-    loadPlugin: function(plugin, defaultOptions) {
-      plugins.push([plugin, defaultOptions || {}]);
+    loadPlugin: function(plugin) {
+      plugins.push(plugin);
     },
 
     planet: function() {
@@ -103,8 +116,8 @@
           hooks.onDraw.push(fn);
         },
 
-        loadPlugin: function(plugin, defaultOptions) {
-          localPlugins.push([plugin, defaultOptions || {}]);
+        loadPlugin: function(plugin) {
+          localPlugins.push(plugin);
         },
 
         withSavedContext: function(fn) {
@@ -127,97 +140,154 @@
     }
   };
 
-  planetaryjs.plugins.topojson = function(planet, config) {
-    planet.onInit(function(done) {
-      if (config.world) {
-        planet.world = config.world;
-        setTimeout(done, 0);
-      } else {
-        var file = config.file || 'world-110m.json'
-        d3.json(file, function(err, world) {
-          if (err) {
-            throw new Error("Could not load JSON " + file);
-          }
-          planet.world = world;
-          done();
-        });
-      }
-    })
-  };
-
-  planetaryjs.plugins.oceans = function(planet, config) {
-    planet.onDraw(function() {
-      planet.withSavedContext(function(context) {
-        context.beginPath();
-        planet.path.context(context)({type: 'Sphere'});
-
-        context.fillStyle = config.fill || 'black';
-        context.fill();
-
-        if (config.stroke != false) {
-          context.strokeStyle = config.stroke;
-          context.stroke();
+  planetaryjs.plugins.topojson = function(config) {
+    return function(planet) {
+      planet.onInit(function(done) {
+        if (config.world) {
+          planet.world = config.world;
+          setTimeout(done, 0);
+        } else {
+          var file = config.file || 'world-110m.json'
+          d3.json(file, function(err, world) {
+            if (err) {
+              throw new Error("Could not load JSON " + file);
+            }
+            planet.world = world;
+            done();
+          });
         }
       });
-    });
+    };
   };
 
-  planetaryjs.plugins.land = function(planet, config) {
-    var land = null;
+  planetaryjs.plugins.oceans = function(config) {
+    return function(planet) {
+      planet.onDraw(function() {
+        planet.withSavedContext(function(context) {
+          context.beginPath();
+          planet.path.context(context)({type: 'Sphere'});
 
-    planet.onInit(function() {
-      land = topojson.feature(planet.world, planet.world.objects.land);
-    })
-
-    planet.onDraw(function() {
-      planet.withSavedContext(function(context) {
-        context.beginPath();
-        planet.path.context(context)(land);
-
-        if (config.fill != false) {
-          context.fillStyle = config.fill || 'white';
+          context.fillStyle = config.fill || 'black';
           context.fill();
-        }
 
-        if (config.stroke) {
-          context.strokeStyle = config.stroke;
+          if (config.stroke != false) {
+            context.strokeStyle = config.stroke;
+            context.stroke();
+          }
+        });
+      });
+    };
+  };
+
+  planetaryjs.plugins.land = function(config) {
+    return function(planet) {
+      var land = null;
+
+      planet.onInit(function() {
+        land = topojson.feature(planet.world, planet.world.objects.land);
+      })
+
+      planet.onDraw(function() {
+        planet.withSavedContext(function(context) {
+          context.beginPath();
+          planet.path.context(context)(land);
+
+          if (config.fill != false) {
+            context.fillStyle = config.fill || 'white';
+            context.fill();
+          }
+
+          if (config.stroke) {
+            context.strokeStyle = config.stroke;
+            context.stroke();
+          }
+        });
+      });
+    };
+  };
+
+  planetaryjs.plugins.borders = function(config) {
+    return function(planet) {
+      var borders = null;
+      planet.onInit(function() {
+        var countries = planet.world.objects.countries;
+        borders = topojson.mesh(planet.world, countries, function(a, b) {
+          return a.id !== b.id;
+        });
+      });
+
+      planet.onDraw(function() {
+        planet.withSavedContext(function(context) {
+          context.beginPath();
+          planet.path.context(context)(borders);
+          context.strokeStyle = config.stroke || 'gray';
           context.stroke();
+        });
+      });
+    };
+  };
+
+  planetaryjs.plugins.earth = function(config) {
+    var config = config || {};
+    var topojsonOptions = config.topojson || {};
+    var oceanOptions = config.oceans || {};
+    var landOptions = config.land || {};
+    var bordersOptions = config.borders || {};
+
+    return function(planet) {
+      planetaryjs.plugins.topojson(topojsonOptions)(planet);
+      planetaryjs.plugins.oceans(oceanOptions)(planet);
+      planetaryjs.plugins.land(landOptions)(planet);
+      planetaryjs.plugins.borders(bordersOptions)(planet);
+    };
+  };
+
+  planetaryjs.plugins.pings = function(config) {
+    var pings = [];
+
+    var addPing = function(lat, lng, options) {
+      var options = options || {};
+      options.color = options.color || 'white';
+      options.ttl = options.ttl || 2000;
+      options.size = options.size || 500;
+      pings.push({ lat: lat, lng: lng, time: new Date(), options: options });
+    };
+
+    var drawPings = function(planet, context, now) {
+      var newPings = [];
+      for (var i = 0; i < pings.length; i++) {
+        var ping = pings[i];
+        var alive = now - ping.time;
+        if (alive <= ping.options.ttl) {
+          newPings.push(ping);
+          drawPing(planet, context, now, ping);
         }
+      }
+      pings = newPings;
+    };
+
+    var drawPing = function(planet, context, now, ping) {
+      var dT = now - ping.time;
+      var alpha = 1 - (dT / ping.options.ttl);
+      var color = d3.rgb(ping.options.color);
+      color = "rgba(" + color.r + "," + color.g + "," + color.b + "," + alpha + ")";
+      context.strokeStyle = color;
+      var circle = d3.geo.circle().origin([ping.lng, ping.lat])
+        .angle(dT / ping.options.size)();
+      context.beginPath();
+      planet.path.context(context)(circle);
+      context.stroke();
+    };
+
+    return function (planet) {
+      planet.addPing = addPing;
+
+      planet.onDraw(function() {
+        var now = new Date();
+        planet.withSavedContext(function(context) {
+          drawPings(planet, context, now);
+        });
       });
-    });
-  };
-
-  planetaryjs.plugins.borders = function(planet, config) {
-    var borders = null;
-    planet.onInit(function() {
-      var countries = planet.world.objects.countries;
-      borders = topojson.mesh(planet.world, countries, function(a, b) {
-        return a.id !== b.id;
-      });
-    });
-
-    planet.onDraw(function() {
-      planet.withSavedContext(function(context) {
-        context.beginPath();
-        planet.path.context(context)(borders);
-        context.strokeStyle = config.stroke || 'gray';
-        context.stroke();
-      });
-    });
-  };
-
-  planetaryjs.plugins.earth = function(options) {
-    var options = options || {};
-    var topojsonOptions = options.topojson || {};
-    var oceanOptions = options.oceans || {};
-    var landOptions = options.land || {};
-    var bordersOptions = options.borders || {};
-
-    return function(planet, options) {
-      planetaryjs.plugins.topojson(planet, topojsonOptions);
-      planetaryjs.plugins.oceans(planet, oceanOptions);
-      planetaryjs.plugins.land(planet, landOptions);
-      planetaryjs.plugins.borders(planet, bordersOptions);
     };
   };
 
