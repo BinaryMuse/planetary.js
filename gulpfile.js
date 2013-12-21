@@ -3,7 +3,6 @@ var uglify = require('gulp-uglify');
 var concat = require('gulp-concat');
 var rename = require('gulp-rename');
 var header = require('gulp-header');
-var gzip = require("gulp-gzip");
 var metadata = require('./package.json');
 
 var shortHeader = "/*! Planetary.js {{version}} | (c) 2013 Brandon Tilley | Released under MIT License */"
@@ -19,11 +18,10 @@ var fullHeader = [
 var fullSource = gulp.src(['./src/_umd_header.js', './src/body.js', './src/plugins.js', './src/_umd_footer.js']);
 var nonPluginSource = gulp.src(['./src/_umd_header.js', './src/body.js', './src/_umd_footer.js']);
 
-function build(source, name, headerText, minify, gzip) {
+function build(source, name, headerText, minify) {
   var js = source.pipe(concat(name));
   if (minify) { js = js.pipe(uglify()); }
   js = js.pipe(header(headerText, { version: metadata.version }));
-  if (gzip) { js = js.pipe(gzip()); }
   js.pipe(gulp.dest('./dist'));
 }
 
