@@ -15,5 +15,11 @@
   "dependencies": {
     "d3": "3.x",
     "topojson": "1.x"
-  }
+  },
+  "keywords": [
+    "globe", "globes",
+    "planet", "planets",
+    "d3",
+    "topojson"
+  ]
 }
