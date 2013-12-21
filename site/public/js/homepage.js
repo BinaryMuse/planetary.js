@@ -16,12 +16,12 @@
   globe.projection.scale(175).translate([175, 175]).rotate([0, -10, 0]);
 
   // Every few hundred milliseconds, we'll draw another random ping.
-  var colors = ['red', 'yellow', 'white', 'orange', 'purple', 'cyan'];
+  var colors = ['red', 'yellow', 'white', 'orange', 'green', 'cyan', 'pink'];
   setInterval(function() {
     var lat = Math.random() * 170 - 85;
     var lng = Math.random() * 360 - 180;
     var color = colors[Math.floor(Math.random() * colors.length)];
-    globe.addPing(lat, lng, { color: color, ttl: 2000, angle: Math.random() * 10 });
+    globe.plugins.pings.add(lat, lng, { color: color, ttl: 2000, angle: Math.random() * 10 });
   }, 250);
 
   var canvas = document.getElementById('homepage-globe-canvas');
