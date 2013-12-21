@@ -1,0 +1,19 @@
+{
+  "name": "planetary.js",
+  "version": "0.0.0",
+  "main": "dist/planetaryjs.min.js",
+  "ignore": [
+    ".git",
+    ".gitignore",
+    "site",
+    "src",
+    "node_modules",
+    "gulpfile.js",
+    "package.json",
+    "screenshot.png"
+  ],
+  "dependencies": {
+    "d3": "3.x",
+    "topojson": "1.x"
+  }
+}
