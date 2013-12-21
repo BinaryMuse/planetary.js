@@ -52,3 +52,13 @@ planet.draw(canvas);
 ```
 
 Congratulations! You've rendered your first globe.
+
+Documentation
+-------------
+
+In-depth documentation can be found at [planetaryjs.com](http://planetaryjs.com).
+
+License
+-------
+
+Planetary.js is licensed under the MIT license. See the `LICENSE` file for more information.
