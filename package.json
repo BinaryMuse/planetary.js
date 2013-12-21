@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "description": "Awesome interactive globes for the web",
   "scripts": {
-    "build": "rm -r dist/ ; gulp",
+    "build": "rm -r dist/ ; gulp && cp dist/planetaryjs.min.js site/public/js/lib",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
