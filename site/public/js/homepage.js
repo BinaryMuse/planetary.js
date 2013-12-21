@@ -1,19 +1,19 @@
 (function() {
-  var earth = planetaryjs.planet();
+  var globe = planetaryjs.planet();
   // The `earth` plugin draws the oceans and the land; it's actually
   // a combination of several separate built-in plugins.
-  earth.loadPlugin(planetaryjs.plugins.earth({
+  globe.loadPlugin(planetaryjs.plugins.earth({
     topojson: { file:   'world-110m.json' },
     oceans:   { fill:   '#000080' },
     land:     { fill:   '#339966' },
     borders:  { stroke: '#008000' }
   }));
   // The `pings` plugin draws animated pings on the globe.
-  earth.loadPlugin(planetaryjs.plugins.pings());
+  globe.loadPlugin(planetaryjs.plugins.pings());
   // Load our custom `autorotate` plugin; see below.
-  earth.loadPlugin(autorotate(10));
+  globe.loadPlugin(autorotate(10));
   // Set up the globe's initial scale, offset, and rotation.
-  earth.projection.scale(175).translate([175, 175]).rotate([0, -10, 0]);
+  globe.projection.scale(175).translate([175, 175]).rotate([0, -10, 0]);
 
   // Every few hundred milliseconds, we'll draw another random ping.
   var colors = ['red', 'yellow', 'white', 'orange', 'purple', 'cyan'];
@@ -21,7 +21,7 @@
     var lat = Math.random() * 170 - 85;
     var lng = Math.random() * 360 - 180;
     var color = colors[Math.floor(Math.random() * colors.length)];
-    earth.addPing(lat, lng, { color: color, ttl: 2000, angle: Math.random() * 10 });
+    globe.addPing(lat, lng, { color: color, ttl: 2000, angle: Math.random() * 10 });
   }, 250);
 
   var canvas = document.getElementById('homepage-globe-canvas');
@@ -34,7 +34,7 @@
     context.scale(2, 2);
   }
   // Draw that globe!
-  earth.draw(canvas);
+  globe.draw(canvas);
 
   // This plugin will automatically rotate the globe around its vertical
   // axis a configured number of degrees every second.
