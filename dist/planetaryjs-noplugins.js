@@ -2,7 +2,7 @@
  *  Copyright (c) 2013 Brandon Tilley
  *
  *  Released under the MIT license
- *  Date: 2013-12-21T20:06:15.792Z
+ *  Date: 2013-12-21T22:36:57.273Z
  */
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -104,6 +104,8 @@
       };
 
       var planet = {
+        plugins: {},
+
         draw: function(canvas) {
           startDraw(planet, canvas, localPlugins, hooks);
         },

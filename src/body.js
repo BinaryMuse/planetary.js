@@ -87,6 +87,8 @@
       };
 
       var planet = {
+        plugins: {},
+
         draw: function(canvas) {
           startDraw(planet, canvas, localPlugins, hooks);
         },

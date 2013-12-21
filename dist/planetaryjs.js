@@ -2,7 +2,7 @@
  *  Copyright (c) 2013 Brandon Tilley
  *
  *  Released under the MIT license
- *  Date: 2013-12-21T20:06:15.617Z
+ *  Date: 2013-12-21T22:36:57.373Z
  */
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -104,6 +104,8 @@
       };
 
       var planet = {
+        plugins: {},
+
         draw: function(canvas) {
           startDraw(planet, canvas, localPlugins, hooks);
         },
@@ -258,16 +260,15 @@
       for (var i = 0; i < pings.length; i++) {
         var ping = pings[i];
         var alive = now - ping.time;
-        if (alive <= ping.options.ttl) {
+        if (alive < ping.options.ttl) {
           newPings.push(ping);
-          drawPing(planet, context, now, ping);
+          drawPing(planet, context, now, alive, ping);
         }
       }
       pings = newPings;
     };
 
-    var drawPing = function(planet, context, now, ping) {
-      var alive = now - ping.time;
+    var drawPing = function(planet, context, now, alive, ping) {
       var alpha = 1 - (alive / ping.options.ttl);
       var color = d3.rgb(ping.options.color);
       color = "rgba(" + color.r + "," + color.g + "," + color.b + "," + alpha + ")";
@@ -280,7 +281,9 @@
     };
 
     return function (planet) {
-      planet.addPing = addPing;
+      planet.plugins.pings = {
+        add: addPing
+      };
 
       planet.onDraw(function() {
         var now = new Date();
