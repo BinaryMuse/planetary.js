@@ -107,7 +107,7 @@
       var options = options || {};
       options.color = options.color || 'white';
       options.ttl = options.ttl || 2000;
-      options.size = options.size || 500;
+      options.angle = options.angle || 5;
       pings.push({ lat: lat, lng: lng, time: new Date(), options: options });
     };
 
@@ -125,13 +125,13 @@
     };
 
     var drawPing = function(planet, context, now, ping) {
-      var dT = now - ping.time;
-      var alpha = 1 - (dT / ping.options.ttl);
+      var alive = now - ping.time;
+      var alpha = 1 - (alive / ping.options.ttl);
       var color = d3.rgb(ping.options.color);
       color = "rgba(" + color.r + "," + color.g + "," + color.b + "," + alpha + ")";
       context.strokeStyle = color;
       var circle = d3.geo.circle().origin([ping.lng, ping.lat])
-        .angle(dT / ping.options.size)();
+        .angle(alive / ping.options.ttl * ping.options.angle)();
       context.beginPath();
       planet.path.context(context)(circle);
       context.stroke();
