@@ -32,6 +32,8 @@ gulp.task('build', function() {
   build(fullSource, 'planetaryjs.min.js', shortHeader, true);
   build(nonPluginSource, 'planetaryjs-noplugins.js', fullHeader, false);
   build(nonPluginSource, 'planetaryjs-noplugins.min.js', shortHeader, true);
+
+  gulp.src('./src/world-110m.json').pipe(gulp.dest('./dist'));
 });
 
 gulp.task('default', function() {
