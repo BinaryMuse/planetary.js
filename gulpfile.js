@@ -10,8 +10,8 @@ var fullHeader = [
   "/*! Planetary.js v{{version}}",
   " *  Copyright (c) 2013 Brandon Tilley",
   " *",
-  " * Released under the MIT license",
-  " * Date: {{now}}",
+  " *  Released under the MIT license",
+  " *  Date: {{now}}",
   " */"
 ].join("\n");
 
