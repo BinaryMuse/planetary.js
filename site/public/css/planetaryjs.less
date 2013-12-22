@@ -23,6 +23,12 @@ h1.title-header, h2.title-header {
 
 .content.container {
   padding-top: 50px;
+
+  .slim {
+    max-width: 1108px;
+    padding: 0 20px;
+    margin: 0 auto;
+  }
 }
 
 .centered {
@@ -68,11 +74,19 @@ canvas {
     display: none !important;
   }
 
-  .ui.grid > .eight.wide.column {
+  .ui.grid > .wide.column {
     width: auto !important;
     min-width: 100%;
   }
 }
+
+.column {
+  h1:first-child {
+    padding-top: 0;
+    margin-top: 0;
+  }
+}
+
 
 @media screen and (min-width: 769px) {
   .hide-on-non-mobile {
@@ -118,4 +132,19 @@ canvas {
 
 .no-underline {
   text-decoration: none;
+}
+
+.ui.menu .item.with-subitems {
+  padding-bottom: 0.2em;
+}
+
+.ui.menu .item.contains-subitems {
+  padding-top: 0;
+  padding-bottom: 0;
+  margin-top: 0;
+}
+
+pre {
+  font-size: 14px;
+  overflow-x: auto;
 }

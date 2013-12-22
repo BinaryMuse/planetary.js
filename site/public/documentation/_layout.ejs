@@ -1,0 +1,54 @@
+<!doctype html>
+<html>
+<head>
+  <%- partial("../_header") %>
+</head>
+<body>
+  <%- partial("../_menu") %>
+
+  <div class='content container'>
+    <div class='page ui slim stackable grid'>
+      <div class='four wide column'>
+        <div class='ui fluid vertical menu'>
+          <a class='item <%- current.source == 'index' ? 'active' : '' %>' href='/documentation/index.html'>
+            Introduction
+            <i class='icon home'></i>
+          </a>
+          <a class='item <%- current.source == 'core' ? 'active' : '' %>' href='/documentation/core.html'>
+            Core API
+            <i class='icon setting'></i>
+          </a>
+          <a class='item <%- current.source == 'planet' ? 'active' : '' %>' href='/documentation/planet.html'>
+            Planet API
+            <i class='icon globe'></i>
+          </a>
+          <a class='item <%- current.source == 'plugins' ? 'active' : '' %>' href='/documentation/plugins.html'>
+            Plugins
+            <i class='icon edit'></i>
+          </a>
+          <a class='item with-subitems <%- current.source == 'builtin' ? 'active' : '' %>' href='/documentation/builtin.html'>
+            Built-In Plugins
+            <i class='icon bolt'></i>
+          </a>
+          <div class='item contains-subitems'>
+            <div class='menu'>
+              <a class='item <%- current.source == 'builtin_earth' ? 'active' : '' %>' href='/documentation/builtin_earth.html'>Earth</a>
+              <a class='item <%- current.source == 'builtin_topojson' ? 'active' : '' %>' href='/documentation/builtin_topojson.html'>TopoJSON</a>
+              <a class='item <%- current.source == 'builtin_oceans' ? 'active' : '' %>' href='/documentation/builtin_oceans.html'>Oceans</a>
+              <a class='item <%- current.source == 'builtin_land' ? 'active' : '' %>' href='/documentation/builtin_land.html'>Land</a>
+              <a class='item <%- current.source == 'builtin_borders' ? 'active' : '' %>' href='/documentation/builtin_borders.html'>Borders</a>
+              <a class='item <%- current.source == 'builtin_pings' ? 'active' : '' %>' href='/documentation/builtin_pings.html'>Pings</a>
+              <a class='item <%- current.source == 'builtin_zoom' ? 'active' : '' %>' href='/documentation/builtin_zoom.html'>Zoom</a>
+              <a class='item <%- current.source == 'builtin_drag' ? 'active' : '' %>' href='/documentation/builtin_drag.html'>Drag</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class='twelve wide column'>
+        <%- yield %>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
