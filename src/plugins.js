@@ -117,9 +117,9 @@
 
     var addPing = function(lat, lng, options) {
       var options = options || {};
-      options.color = options.color || 'white';
-      options.ttl = options.ttl || 2000;
-      options.angle = options.angle || 5;
+      options.color = options.color || config.color || 'white';
+      options.ttl = options.ttl || config.ttl || 2000;
+      options.angle = options.angle || config.angle || 5;
       pings.push({ lat: lat, lng: lng, time: new Date(), options: options });
     };
 

@@ -3,6 +3,7 @@
 * Remove the `stroke` configuration option from the `oceans` plugin
 * Add the `lineWidth` configuration option to the `land` and `borders` plugins
 * Add the `type` configuration option to the `borders` plugin
+* Allow default configuration options to be passed to the `pings` plugin
 
 v0.1.1
 ------

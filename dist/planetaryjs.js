@@ -2,7 +2,7 @@
  *  Copyright (c) 2013 Brandon Tilley
  *
  *  Released under the MIT license
- *  Date: 2013-12-22T07:11:05.053Z
+ *  Date: 2013-12-22T07:33:27.956Z
  */
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -261,9 +261,9 @@
 
     var addPing = function(lat, lng, options) {
       var options = options || {};
-      options.color = options.color || 'white';
-      options.ttl = options.ttl || 2000;
-      options.angle = options.angle || 5;
+      options.color = options.color || config.color || 'white';
+      options.ttl = options.ttl || config.ttl || 2000;
+      options.angle = options.angle || config.angle || 5;
       pings.push({ lat: lat, lng: lng, time: new Date(), options: options });
     };
 
