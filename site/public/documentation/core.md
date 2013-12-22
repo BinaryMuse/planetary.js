@@ -21,6 +21,8 @@ Once you've [downloaded Planetary.js](https://github.com/BinaryMuse/planetary.js
 ```
 </div>
 
+If you use the default `topojson` plugin (most people will), you'll also need to make sure `world-110m.json` (or some other TopoJSON data file) is available on your server. This file is also available from [the download page](https://github.com/BinaryMuse/planetary.js/releases). See the [TopoJSON Plugin](/documentation/builtin_topojson.html) documentation for more information.
+
 Core API
 --------
 
