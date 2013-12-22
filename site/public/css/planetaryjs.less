@@ -135,13 +135,18 @@ canvas {
 }
 
 .ui.menu .item.with-subitems {
-  padding-bottom: 0.2em;
+  // padding-bottom: 0.2em;
 }
 
 .ui.menu .item.contains-subitems {
   padding-top: 0;
   padding-bottom: 0;
   margin-top: 0;
+
+  &:before {
+    width: 0;
+    height: 0;
+  }
 }
 
 pre {
