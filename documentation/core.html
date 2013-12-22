@@ -1,0 +1,121 @@
+<!doctype html>
+<html>
+<head>
+  <title>Planetary.js</title>
+<link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Open+Sans:300italic,400,300,700' rel='stylesheet' type='text/css'>
+<link type="text/css" rel="stylesheet" href="/semantic/css/semantic.min.css">
+<link type="text/css" rel="stylesheet" href="/css/planetaryjs.css">
+
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+
+</head>
+<body>
+  <div class='ui fixed inverted large menu main-menu'>
+  <div class='items'>
+    <a class='item title' href='/index.html'>
+      <i class='globe icon'></i>Planetary.js
+    </a>
+    <span class='spacer hide-on-mobile'></span>
+    <a class='item minor' href='https://github.com/BinaryMuse/planetary.js/releases'>
+      <i class='download icon'></i><span class='hide-on-mobile'>Download</span>
+    </a>
+    <a class='item minor' href='/examples/'>
+      <i class='laptop icon'></i><span class='hide-on-mobile'>Examples</span>
+    </a>
+    <a class='item minor' href='/documentation/'>
+      <i class='book icon'></i><span class='hide-on-mobile'>Documentation</span>
+    </a>
+    <a class='item minor' href='https://github.com/BinaryMuse/planetary.js'>
+      <i class='github alternate icon'></i><span class='hide-on-mobile'>Fork on GitHub</span>
+    </a>
+  </div>
+</div>
+
+
+  <div class='content container'>
+    <div class='page ui slim stackable grid'>
+      <div class='four wide column'>
+        <div class='ui fluid vertical menu'>
+          <a class='item ' href='/documentation/index.html'>
+            Introduction
+            <i class='icon home'></i>
+          </a>
+          <a class='item active' href='/documentation/core.html'>
+            Core API
+            <i class='icon setting'></i>
+          </a>
+          <a class='item ' href='/documentation/planet.html'>
+            Planet API
+            <i class='icon globe'></i>
+          </a>
+          <a class='item ' href='/documentation/plugins.html'>
+            Plugins
+            <i class='icon edit'></i>
+          </a>
+          <a class='item with-subitems ' href='/documentation/builtin.html'>
+            Built-In Plugins
+            <i class='icon bolt'></i>
+          </a>
+          <div class='item contains-subitems'>
+            <div class='menu'>
+              <a class='item ' href='/documentation/builtin_earth.html'>Earth</a>
+              <a class='item ' href='/documentation/builtin_topojson.html'>TopoJSON</a>
+              <a class='item ' href='/documentation/builtin_oceans.html'>Oceans</a>
+              <a class='item ' href='/documentation/builtin_land.html'>Land</a>
+              <a class='item ' href='/documentation/builtin_borders.html'>Borders</a>
+              <a class='item ' href='/documentation/builtin_pings.html'>Pings</a>
+              <a class='item ' href='/documentation/builtin_zoom.html'>Zoom</a>
+              <a class='item ' href='/documentation/builtin_drag.html'>Drag</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class='twelve wide column'>
+        <h1>Core API</h1>
+<h2>Installation</h2>
+<p>Once you&#39;ve <a href="https://github.com/BinaryMuse/planetary.js/releases">downloaded Planetary.js</a>, you can include it via a <code>script</code> tag on your page <em>after</em> the inclusion of D3 and TopoJSON. This example uses the CDN URLs for those libraries:</p>
+<div class='ui raised segment'>
+<div class='ui blue ribbon label'>HTML</div>
+
+<pre><code class="language-html">&lt;html&gt;
+&lt;head&gt;
+  &lt;script type=&#39;text/javascript&#39; src=&#39;http://d3js.org/d3.v3.min.js&#39;&gt;&lt;/script&gt;
+  &lt;script type=&#39;text/javascript&#39; src=&#39;http://d3js.org/topojson.v1.min.js&#39;&gt;&lt;/script&gt;
+  &lt;script type=&#39;text/javascript&#39; src=&#39;path/to/planetaryjs.min.js&#39;&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+...</code></pre>
+<p></div></p>
+<h2>Core API</h2>
+<p><strong><code>planetaryjs.noConflict()</code></strong></p>
+<p>In non-AMD and non-CommonJS environments, Planetary.js takes over the global <code>planetaryjs</code> namespace (in the browser, this means <code>window.planetaryjs</code>). If, for some reason, something else useful was there before you loaded Planetary.js, you can ask for it to be returned to that spot by calling <code>planetaryjs.noConflict()</code>. The Planetary.js library will be returned from the function, so you can continue to use the library.</p>
+<div class='ui raised segment'>
+<div class='ui red ribbon label'>JavaScript</div>
+
+<pre><code class="language-javascript">var planetary = planetaryjs.noConflict();</code></pre>
+<p></div></p>
+<p><strong><code>planetaryjs.loadPlugin(plugin)</code></strong></p>
+<p>Planetary.js uses a plugin architecture for all its functionality. Calling <code>planetaryjs.loadPlugin</code> will cause that plugin to be loaded in <em>all</em> planets created from this library. If you only want to use a plugin in some of your planets, use the <code>planet.loadPlugin</code> method (from the <a href="/documentation/planet.html">Planet API</a>) instead.</p>
+<div class='ui raise segment'>
+<div class='ui red ribbon label'>JavaScript</div>
+
+<pre><code class="language-javascript">planetaryjs.loadPlugin(somePlugin);
+planetaryjs.loadPlugin(somePluginGenerator());</code></pre>
+<p></div></p>
+<p>For more information on the plugin system and API, please see the <a href="/documentation/plugins.html">Plugins</a> documentation.</p>
+<p><strong><code>planetaryjs.planet()</code></strong></p>
+<p>The <code>planet</code> API call returns a new planet instance, which represents a single globe. It will be created with all the plugins registered with <code>planetaryjs.loadPlugin()</code> active. It has various methods for manipulating the globe and drawing it to a canvas. The <a href="/documentation/planet.html">Planet API</a> covers these methods in considerably more detail.</p>
+<div class='ui raise segment'>
+<div class='ui red ribbon label'>JavaScript</div>
+
+<pre><code class="language-javascript">var planet = planetaryjs.planet();</code></pre>
+<p></div></p>
+
+      </div>
+    </div>
+  </div>
+</body>
+</html>
