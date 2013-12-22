@@ -1,7 +1,7 @@
 Drag Plugin
 ===========
 
-The `drag` plugin allows for modifying the planet's projection's rotation with the mouse wheel. It supports dragging vertically with hard stops at the north and south poles, and dragging horizontally without restriction.
+The `drag` plugin allows for modifying the planet's projection's rotation with the mouse. It supports dragging vertically with hard stops at the north and south poles, and dragging horizontally without restriction.
 
 API
 ---
