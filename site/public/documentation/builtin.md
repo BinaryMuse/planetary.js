@@ -11,3 +11,5 @@ Planetary.js comes with several built-in plugins that provide a base set of func
 * [Pings](/documentation/builtin_pings.html) - draws animated, circular pings on the globe
 * [Zoom](/documentation/builtin_zoom.html) - enables mouse-based zooming of the globe via the mousewheel
 * [Drag](/documentation/builtin_drag.html) - enables mouse-based rotation of the globe via dragging
+
+Built-in plugins exposed as properties on `planetaryjs.plugins`.
