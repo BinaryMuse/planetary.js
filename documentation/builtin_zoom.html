@@ -80,7 +80,25 @@
 
       <div class='twelve wide column'>
         <h1>Zoom Plugin</h1>
-<p>This plugin is not yet impelemented.</p>
+<p>The <code>zoom</code> plugin allows for modifying the planet&#39;s projection&#39;s scale with the mouse wheel.</p>
+<h2>API</h2>
+<p><strong><code>planetaryjs.plugins.zoom([config])</code></strong></p>
+<p>Valid keys for <code>config</code> are:</p>
+<ul>
+<li><code>initialScale</code>: the value to initialize the <a href="https://github.com/mbostock/d3/wiki/Zoom-Behavior"><code>d3.behavior.zoom</code></a> object&#39;s scale to; defaults to the scale of the planet&#39;s projection at the time the planet is initialized</li>
+<li><code>scaleExtent</code>: the value to use for the <code>d3.behavior.zoom</code> object&#39;s <code>scaleExtent</code> property, which defines how far in and out the planet can be zoomed; defaults to <code>[50, 2000]</code></li>
+<li><code>onZoom</code>, <code>onZoomStart</code>, <code>onZoomEnd</code>: hooks to the <code>d3.behavior.zoom</code> object&#39;s <code>zoom</code>, <code>zoomstart</code>, and <code>zoomend</code> events; each defaults to a no-op</li>
+</ul>
+<div class='ui raise segment'>
+<div class='ui red ribbon label'>JavaScript</div>
+
+<pre><code class="language-javascript">planetaryjs.plugins.zoom({
+  scaleExtent: [200, 1000],
+  onZoom: function() {
+    console.log(&quot;The planet was zoomed!&quot;, d3.event);
+  }
+});</code></pre>
+<p></div></p>
 
       </div>
     </div>

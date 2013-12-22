@@ -80,7 +80,22 @@
 
       <div class='twelve wide column'>
         <h1>Drag Plugin</h1>
-<p>This plugin is not yet impelemented.</p>
+<p>The <code>drag</code> plugin allows for modifying the planet&#39;s projection&#39;s rotation with the mouse wheel. It supports dragging vertically with hard stops at the north and south poles, and dragging horizontally without restriction.</p>
+<h2>API</h2>
+<p><strong><code>planetaryjs.plugins.drag([config])</code></strong></p>
+<p>Valid keys for <code>config</code> are:</p>
+<ul>
+<li><code>onDrag</code>, <code>onDragStart</code>, <code>onDragEnd</code>: hooks to the <code>d3.behavior.drag</code> object&#39;s <code>drag</code>, <code>dragstart</code>, and <code>dragend</code> events; each defaults to a no-op</li>
+</ul>
+<div class='ui raise segment'>
+<div class='ui red ribbon label'>JavaScript</div>
+
+<pre><code class="language-javascript">planetaryjs.plugins.drag({
+  onDrag: function() {
+    console.log(&quot;The planet was dragged!&quot;, d3.event);
+  }
+});</code></pre>
+<p></div></p>
 
       </div>
     </div>
