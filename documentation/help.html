@@ -62,7 +62,7 @@
           <div class='item contains-subitems'>
             <div class='menu'>
               <a class='item ' href='/documentation/builtin_earth.html'>Earth</a>
-              <a class='item active' href='/documentation/builtin_topojson.html'>TopoJSON</a>
+              <a class='item ' href='/documentation/builtin_topojson.html'>TopoJSON</a>
               <a class='item ' href='/documentation/builtin_oceans.html'>Oceans</a>
               <a class='item ' href='/documentation/builtin_land.html'>Land</a>
               <a class='item ' href='/documentation/builtin_borders.html'>Borders</a>
@@ -71,7 +71,7 @@
               <a class='item ' href='/documentation/builtin_drag.html'>Drag</a>
             </div>
           </div>
-          <a class='green item ' href='/documentation/help.html'>
+          <a class='green item active' href='/documentation/help.html'>
             Getting Help
             <i class='icon help'></i>
           </a>
@@ -79,38 +79,10 @@
       </div>
 
       <div class='twelve wide column'>
-        <h1>TopoJSON Plugin</h1>
-<p>The <code>topojson</code> plugin parses <a href="https://github.com/mbostock/topojson">TopoJSON data</a> and publishes it on <code>planet.plugins.topojson.world</code> for other plugins to use (particularly for rendering geographical data using D3).</p>
-<p>The plugin can load data from a file using Ajax, or can be provided an object that has come from some other source.</p>
-<h2>API</h2>
-<p><strong><code>planetaryjs.plugins.topojson([config])</code></strong></p>
-<p>Valid keys for <code>config</code> are:</p>
-<ul>
-<li><code>world</code>: a JavaScript object representing TopoJSON data (not JSON data); defaults to no value, which will cause the plugin to load data from the <code>file</code> configuration option</li>
-<li><code>file</code>: the path to a TopoJSON data file to be loaded via Ajax; defaults to <code>&quot;world-110m.json&quot;</code>, which can be downloaded with the Planetary.js library from the <a href="https://github.com/BinaryMuse/planetary.js/releases">download page</a>.</li>
-</ul>
-<p>If you plan on creating more than one planet from the same TopoJSON data, you can load the data once before loading the plugin and pass the parsed data to the plugin via the <code>world</code> property rather than letting the plugin load the data via Ajax each time a new planet is created.</p>
-<div class='ui raise segment'>
-<div class='ui red ribbon label'>JavaScript</div>
-
-<pre><code class="language-javascript">planetaryjs.plugins.topojson({
-  file: &#39;/data/world-110m.json&#39;
-});</code></pre>
-<p></div></p>
-<div class='ui raise segment'>
-<div class='ui red ribbon label'>JavaScript</div>
-
-<pre><code class="language-javascript">d3.json(&#39;/data/world-110m.json&#39;, function(err, data) {
-  planetaryjs.plugins.topojson({
-    world: data
-  });
-  // Create planets inside this callback
-});</code></pre>
-<p></div></p>
-<ul>
-<li><a href="/documentation/builtin_land.html">Land Plugin</a></li>
-<li><a href="/documentation/builtin_borders.html">Borders Plugin</a></li>
-</ul>
+        <h1>Getting Help</h1>
+<p><a href="http://stackoverflow.com/">Stack Overflow</a> is a great place to get help when you&#39;re stuck on a particular issue. Tag your question with <code>planetary.js</code> when you post it.</p>
+<p>If you think you&#39;ve found a bug, hop over to <a href="https://github.com/BinaryMuse/planetary.js/issues">the Planetary.js issues page</a> and file a bug (assuming the same bug hasn&#39;t already been reported).</p>
+<p>If you have an idea for an improvement or other change, feel free to open a GitHub pull request.</p>
 
       </div>
     </div>
