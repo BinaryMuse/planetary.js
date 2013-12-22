@@ -58,6 +58,11 @@ Documentation
 
 In-depth documentation can be found at [planetaryjs.com](http://planetaryjs.com).
 
+Building
+--------
+
+Building the project requires [Node.js](http://nodejs.org/). Once you've installed the project's dependencies with `npm install`, you can build the JavaScript to the `dist` directory with `npm run build`.
+
 License
 -------
 
