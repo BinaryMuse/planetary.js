@@ -13,3 +13,5 @@ Planetary.js comes with several built-in plugins that provide a base set of func
 * [Drag](/documentation/builtin_drag.html) - enables mouse-based rotation of the globe via dragging
 
 Built-in plugins exposed as properties on `planetaryjs.plugins`.
+
+If you do not specify any plugins (globally or per-instance), Planetary.js will use the `earth` and `pings` plugins with their default settings.
