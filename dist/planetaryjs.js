@@ -2,7 +2,7 @@
  *  Copyright (c) 2013 Brandon Tilley
  *
  *  Released under the MIT license
- *  Date: 2013-12-22T07:02:54.331Z
+ *  Date: 2013-12-22T07:11:05.053Z
  */
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -210,12 +210,23 @@
   planetaryjs.plugins.borders = function(config) {
     return function(planet) {
       var borders = null;
+      var borderFns = {
+        internal: function(a, b) {
+          return a.id !== b.id;
+        },
+        external: function(a, b) {
+          return a.id === b.id;
+        },
+        both: function(a, b) {
+          return true;
+        }
+      };
+
       planet.onInit(function() {
         var world = planet.plugins.topojson.world;
         var countries = world.objects.countries;
-        borders = topojson.mesh(world, countries, function(a, b) {
-          return a.id !== b.id;
-        });
+        var type = config.type || 'internal';
+        borders = topojson.mesh(world, countries, borderFns[type]);
       });
 
       planet.onDraw(function() {

@@ -66,12 +66,23 @@
   planetaryjs.plugins.borders = function(config) {
     return function(planet) {
       var borders = null;
+      var borderFns = {
+        internal: function(a, b) {
+          return a.id !== b.id;
+        },
+        external: function(a, b) {
+          return a.id === b.id;
+        },
+        both: function(a, b) {
+          return true;
+        }
+      };
+
       planet.onInit(function() {
         var world = planet.plugins.topojson.world;
         var countries = world.objects.countries;
-        borders = topojson.mesh(world, countries, function(a, b) {
-          return a.id !== b.id;
-        });
+        var type = config.type || 'internal';
+        borders = topojson.mesh(world, countries, borderFns[type]);
       });
 
       planet.onDraw(function() {
