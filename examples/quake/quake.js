@@ -139,6 +139,7 @@
       }
 
       currentTime += dataDelta;
+      if (currentTime > end) currentTime = start;
       d3.select('#date').text(new Date(currentTime));
       d3.select('#slider').property('value', percentToDate.invert(currentTime));
       lastTick = now;
