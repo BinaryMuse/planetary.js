@@ -1,8 +1,8 @@
-/*! Planetary.js v0.0.0
+/*! Planetary.js v0.1.1
  *  Copyright (c) 2013 Brandon Tilley
  *
  *  Released under the MIT license
- *  Date: 2013-12-21T22:36:57.373Z
+ *  Date: 2013-12-22T04:25:03.494Z
  */
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -144,9 +144,11 @@
 
   planetaryjs.plugins.topojson = function(config) {
     return function(planet) {
+      planet.plugins.topojson = {};
+
       planet.onInit(function(done) {
         if (config.world) {
-          planet.world = config.world;
+          planet.plugins.topojson.world = config.world;
           setTimeout(done, 0);
         } else {
           var file = config.file || 'world-110m.json'
@@ -154,7 +156,7 @@
             if (err) {
               throw new Error("Could not load JSON " + file);
             }
-            planet.world = world;
+            planet.plugins.topojson.world = world;
             done();
           });
         }
@@ -186,7 +188,8 @@
       var land = null;
 
       planet.onInit(function() {
-        land = topojson.feature(planet.world, planet.world.objects.land);
+        var world = planet.plugins.topojson.world;
+        land = topojson.feature(world, world.objects.land);
       })
 
       planet.onDraw(function() {
@@ -212,8 +215,9 @@
     return function(planet) {
       var borders = null;
       planet.onInit(function() {
-        var countries = planet.world.objects.countries;
-        borders = topojson.mesh(planet.world, countries, function(a, b) {
+        var world = planet.plugins.topojson.world;
+        var countries = world.objects.countries;
+        borders = topojson.mesh(world, countries, function(a, b) {
           return a.id !== b.id;
         });
       });
