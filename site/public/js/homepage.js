@@ -12,6 +12,21 @@
   globe.loadPlugin(planetaryjs.plugins.pings());
   // Load our custom `autorotate` plugin; see below.
   globe.loadPlugin(autorotate(10));
+  // The `zoom` and `drag` plugins enable
+  // manipulating the globe with the mouse.
+  globe.loadPlugin(planetaryjs.plugins.zoom({
+    scaleExtent: [100, 300]
+  }));
+  globe.loadPlugin(planetaryjs.plugins.drag({
+    // Dragging the globe shoud pause the
+    // automatic rotation until we release the mouse.
+    onDragStart: function() {
+      globe.plugins.autorotate.pause();
+    },
+    onDragEnd: function() {
+      globe.plugins.autorotate.resume();
+    }
+  }))
   // Set up the globe's initial scale, offset, and rotation.
   globe.projection.scale(175).translate([175, 175]).rotate([0, -10, 0]);
 
@@ -43,9 +58,14 @@
     // as an argument...
     return function(planet) {
       var lastTick = null;
+      var paused = false;
+      planet.plugins.autorotate = {
+        pause:  function() { paused = true;  },
+        resume: function() { paused = false; }
+      };
       // ...and configure hooks into certain pieces of its lifecycle.
       planet.onDraw(function() {
-        if (!lastTick) {
+        if (paused || !lastTick) {
           lastTick = new Date();
         } else {
           var now = new Date();

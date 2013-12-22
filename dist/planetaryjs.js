@@ -2,7 +2,7 @@
  *  Copyright (c) 2013 Brandon Tilley
  *
  *  Released under the MIT license
- *  Date: 2013-12-22T07:35:17.783Z
+ *  Date: 2013-12-22T21:59:27.872Z
  */
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -302,6 +302,71 @@
         planet.withSavedContext(function(context) {
           drawPings(planet, context, now);
         });
+      });
+    };
+  };
+
+  planetaryjs.plugins.zoom = function (options) {
+    var options = options || {};
+    var noop = function() {};
+    var onZoomStart = options.onZoomStart || noop;
+    var onZoomEnd   = options.onZoomEnd   || noop;
+    var onZoom      = options.onZoom      || noop;
+    var startScale  = options.initialScale;
+    var scaleExtent = options.scaleExtent || [50, 2000];
+
+    return function(planet) {
+      planet.onInit(function() {
+        var zoom = d3.behavior.zoom()
+          .scaleExtent(scaleExtent);
+        if (startScale) {
+          zoom.scale(startScale);
+        } else {
+          zoom.scale(planet.projection.scale());
+        }
+        zoom
+          .on('zoomstart', onZoomStart)
+          .on('zoomend', onZoomEnd)
+          .on('zoom', function() {
+            onZoom();
+            planet.projection.scale(d3.event.scale);
+          });
+        d3.select(planet.canvas).call(zoom);
+      });
+    };
+  };
+
+  planetaryjs.plugins.drag = function(options) {
+    var options = options || {};
+    var noop = function() {};
+    var onDragStart = options.onDragStart || noop;
+    var onDragEnd   = options.onDragEnd   || noop;
+    var onDrag      = options.onDrag      || noop;
+
+    return function(planet) {
+      planet.onInit(function() {
+        var drag = d3.behavior.drag()
+          .on('dragstart', onDragStart)
+          .on('dragend', onDragEnd)
+          .on('drag', function() {
+            onDrag();
+            var dx = d3.event.dx;
+            var dy = d3.event.dy;
+            var rotation = planet.projection.rotate();
+            var radius = planet.projection.scale();
+            var scale = d3.scale.linear()
+              .domain([-1 * radius, radius])
+              .range([-90, 90]);
+            var degX = scale(dx);
+            var degY = scale(dy);
+            rotation[0] += degX;
+            rotation[1] -= degY;
+            if (rotation[1] > 90)   rotation[1] = 90;
+            if (rotation[1] < -90)  rotation[1] = -90;
+            if (rotation[0] >= 180) rotation[0] -= 360;
+            planet.projection.rotate(rotation);
+          });
+        d3.select(planet.canvas).call(drag);
       });
     };
   };
