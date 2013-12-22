@@ -175,3 +175,13 @@ setTimeout(function() {
 }, 5000);
 ```
 </div>
+
+Best Practices
+--------------
+
+There are a few things you can do to make your plugin all it can be:
+
+1. Make your plugin very small; ideally, it should do only *one thing* very well. Be extremely liberal with splitting plugins into smaller plugins, which makes them easier to understand, test, and compose. It's easy to say "this plugin renders the Earth," but it really renders oceans, land masses, and borders.
+2. Use function generators to generate your plugin (as described above in "Plugin Generators"), even if it doesn't take any configuration options. It makes for a more consistent API, and allows you to add the ability to specify configuration options in the future without changing the base API.
+3. Make configuration optional if at all possible. Write your plugin so that it checks for missing values and uses sensible defaults.
+4. Only publish public data and API methods to `planet.plugins.pluginName`, where `pluginName` is the name of your plugin.
