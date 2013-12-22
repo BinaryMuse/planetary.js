@@ -29,11 +29,6 @@
 
           context.fillStyle = config.fill || 'black';
           context.fill();
-
-          if (config.stroke != false) {
-            context.strokeStyle = config.stroke;
-            context.stroke();
-          }
         });
       });
     };
