@@ -1,7 +1,7 @@
 <!doctype html>
 <html>
 <head>
-  <title>Planetary.js</title>
+  <title>Planetary.js: Awesome interactive globes for the web</title>
 <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Open+Sans:300italic,400,300,700' rel='stylesheet' type='text/css'>
 <link type="text/css" rel="stylesheet" href="/semantic/css/semantic.min.css">
 <link type="text/css" rel="stylesheet" href="/css/planetaryjs.css">
@@ -76,6 +76,26 @@
 
       <div class='twelve wide column'>
         <h1>Borders Plugin</h1>
+<p>The <code>borders</code> plugin renders the borders around (and between) countries. It uses TopoJSON data published to <code>planet.plugins.topojson.world</code> by the <a href="/documentation/builtin_topojson.html">TopoJSON plugin</a>.</p>
+<h2>API</h2>
+<p><strong><code>planetaryjs.plugins.borders([config])</code></strong></p>
+<p>Valid keys for <code>config</code> are:</p>
+<ul>
+<li><code>stroke</code>: the <code>strokeStyle</code> to use for the context; defaults to <code>&quot;gray&quot;</code></li>
+<li><code>lineWidth</code> the <code>lineWidth</code> to set on the context; defaults to no value, and the context&#39;s <code>lineWidth</code> is not modified</li>
+<li><code>type</code>: valid options are <code>&quot;internal&quot;</code>, <code>&quot;external&quot;</code>, or <code>&quot;both&quot;</code>. <code>&quot;internal&quot;</code> draws borders between countries but not coastlines; <code>&quot;external&quot;</code> does the opposite. <code>&quot;both&quot;</code>, unsurprisingly, draws both. Defaults to <code>&quot;internal&quot;</code>.</li>
+</ul>
+<div class='ui raise segment'>
+<div class='ui red ribbon label'>JavaScript</div>
+
+<pre><code class="language-javascript">planetaryjs.plugins.borders({
+  stroke: &#39;#008000&#39;, lineWidth: 0.25, type: &#39;both&#39;
+});</code></pre>
+<p></div></p>
+<p>See also:</p>
+<ul>
+<li><a href="/documentation/builtin_topojson.html">TopoJSON Plugin</a></li>
+</ul>
 
       </div>
     </div>

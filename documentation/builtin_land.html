@@ -1,7 +1,7 @@
 <!doctype html>
 <html>
 <head>
-  <title>Planetary.js</title>
+  <title>Planetary.js: Awesome interactive globes for the web</title>
 <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Open+Sans:300italic,400,300,700' rel='stylesheet' type='text/css'>
 <link type="text/css" rel="stylesheet" href="/semantic/css/semantic.min.css">
 <link type="text/css" rel="stylesheet" href="/css/planetaryjs.css">
@@ -76,6 +76,26 @@
 
       <div class='twelve wide column'>
         <h1>Land Plugin</h1>
+<p>The <code>land</code> plugin renders Earth&#39;s landmasses. It uses TopoJSON data published to <code>planet.plugins.topojson.world</code> by the <a href="/documentation/builtin_topojson.html">TopoJSON plugin</a>.</p>
+<h2>API</h2>
+<p><strong><code>planetaryjs.plugins.land([config])</code></strong></p>
+<p>Valid keys for <code>config</code> are:</p>
+<ul>
+<li><code>fill</code>: the <code>fillStyle</code> to use for the context; defaults to <code>&quot;white&quot;</code></li>
+<li><code>stroke</code>: the <code>strokeStyle</code> to use for the context; defaults to no value, resulting in no stroke around the landmasses</li>
+<li><code>lineWidth</code> the <code>lineWidth</code> to set on the context; only effective if <code>stroke</code> is set. Defaults to no value, resulting in no change to the context&#39;s <code>lineWidth</code></li>
+</ul>
+<div class='ui raise segment'>
+<div class='ui red ribbon label'>JavaScript</div>
+
+<pre><code class="language-javascript">planetaryjs.plugins.land({
+  fill: &#39;#339966&#39;, stroke: &#39;#000000&#39;
+});</code></pre>
+<p></div></p>
+<p>See also:</p>
+<ul>
+<li><a href="/documentation/builtin_topojson.html">TopoJSON Plugin</a></li>
+</ul>
 
       </div>
     </div>

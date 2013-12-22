@@ -1,7 +1,7 @@
 <!doctype html>
 <html>
 <head>
-  <title>Planetary.js</title>
+  <title>Planetary.js: Awesome interactive globes for the web</title>
 <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Open+Sans:300italic,400,300,700' rel='stylesheet' type='text/css'>
 <link type="text/css" rel="stylesheet" href="/semantic/css/semantic.min.css">
 <link type="text/css" rel="stylesheet" href="/css/planetaryjs.css">
@@ -205,6 +205,14 @@ setTimeout(function() {
   planet.plugins.autorotate.pause();
 }, 5000);</code></pre>
 <p></div></p>
+<h2>Best Practices</h2>
+<p>There are a few things you can do to make your plugin all it can be:</p>
+<ol>
+<li>Make your plugin very small; ideally, it should do only <em>one thing</em> very well. Be extremely liberal with splitting plugins into smaller plugins, which makes them easier to understand, test, and compose. It&#39;s easy to say &quot;this plugin renders the Earth,&quot; but it really renders oceans, land masses, and borders.</li>
+<li>Use function generators to generate your plugin (as described above in &quot;Plugin Generators&quot;), even if it doesn&#39;t take any configuration options. It makes for a more consistent API, and allows you to add the ability to specify configuration options in the future without changing the base API.</li>
+<li>Make configuration optional if at all possible. Write your plugin so that it checks for missing values and uses sensible defaults.</li>
+<li>Only publish public data and API methods to <code>planet.plugins.pluginName</code>, where <code>pluginName</code> is the name of your plugin.</li>
+</ol>
 
       </div>
     </div>

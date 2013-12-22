@@ -1,7 +1,7 @@
 <!doctype html>
 <html>
 <head>
-  <title>Planetary.js</title>
+  <title>Planetary.js: Awesome interactive globes for the web</title>
 <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Open+Sans:300italic,400,300,700' rel='stylesheet' type='text/css'>
 <link type="text/css" rel="stylesheet" href="/semantic/css/semantic.min.css">
 <link type="text/css" rel="stylesheet" href="/css/planetaryjs.css">
@@ -76,6 +76,36 @@
 
       <div class='twelve wide column'>
         <h1>Pings Plugin</h1>
+<p>The <code>pings</code> plugin allows you to display animated &quot;pings&quot; at any location on the planet. It publishes a method to create pings at <code>planet.plugins.pings.add</code>.</p>
+<h2>API</h2>
+<p><strong><code>planetaryjs.plugins.pings([config])</code></strong></p>
+<p>Valid keys for <code>config</code> are:</p>
+<ul>
+<li><code>color</code>: the default color for pings; defaults to <code>&quot;white&quot;</code></li>
+<li><code>ttl</code>: the default TTL for pings in milliseconds (how long they take to fade out); defaults to 2000</li>
+<li><code>angle</code>: the maximum angle for the ping (it will grow to this size over the course of its TTL); defaults to <code>5</code></li>
+</ul>
+<div class='ui raise segment'>
+<div class='ui red ribbon label'>JavaScript</div>
+
+<pre><code class="language-javascript">planetaryjs.plugins.pings({
+  color: &#39;yellow&#39;, ttl: 5000, angle: 10
+});</code></pre>
+<p></div></p>
+<p><strong><code>planet.plugins.pings.add(lat, lng, [config])</code></strong></p>
+<p>Add a new ping to the globe at the latitudinal and longitudinal coordinates specified by <code>lat</code> and <code>lng</code>. <code>config</code> may take all the same keys as the configuration option for the plugin itself; any values will overwrite values from that object, if any were set.</p>
+<div class='ui raise segment'>
+<div class='ui red ribbon label'>JavaScript</div>
+
+<pre><code class="language-javascript">var colors = [&#39;red&#39;, &#39;yellow&#39;, &#39;white&#39;, &#39;orange&#39;, &#39;green&#39;, &#39;cyan&#39;, &#39;pink&#39;];
+setInterval(function() {
+  var lat = Math.random() * 170 - 85;
+  var lng = Math.random() * 360 - 180;
+  var color = colors[Math.floor(Math.random() * colors.length)];
+  var angle = Math.random() * 10;
+  planet.plugins.pings.add(lat, lng, { color: color, ttl: 2000, angle: angle });
+}, 250);</code></pre>
+<p></div></p>
 
       </div>
     </div>

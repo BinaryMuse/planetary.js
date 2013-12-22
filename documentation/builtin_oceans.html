@@ -1,7 +1,7 @@
 <!doctype html>
 <html>
 <head>
-  <title>Planetary.js</title>
+  <title>Planetary.js: Awesome interactive globes for the web</title>
 <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Open+Sans:300italic,400,300,700' rel='stylesheet' type='text/css'>
 <link type="text/css" rel="stylesheet" href="/semantic/css/semantic.min.css">
 <link type="text/css" rel="stylesheet" href="/css/planetaryjs.css">
@@ -76,6 +76,20 @@
 
       <div class='twelve wide column'>
         <h1>Oceans Plugin</h1>
+<p>The <code>oceans</code> plugin simply renders the main shape of the globe, filling it in with a solid color.</p>
+<h2>API</h2>
+<p><strong><code>planetaryjs.plugins.oceans([config])</code></strong></p>
+<p>Valid keys for <code>config</code> are:</p>
+<ul>
+<li><code>fill</code>: the <code>fillStyle</code> to use for the globe; defaults to <code>&quot;black&quot;</code></li>
+</ul>
+<div class='ui raise segment'>
+<div class='ui red ribbon label'>JavaScript</div>
+
+<pre><code class="language-javascript">planetaryjs.plugins.oceans({
+  fill: &#39;#000080&#39;
+});</code></pre>
+<p></div></p>
 
       </div>
     </div>
