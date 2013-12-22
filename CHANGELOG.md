@@ -1,3 +1,6 @@
+v0.2.1
+------
+
 * Implement the `drag` and `zoom` plugins
 
 v0.2.0

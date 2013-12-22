@@ -1,6 +1,6 @@
 {
   "name": "planetary.js",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "main": "dist/planetaryjs.min.js",
   "description": "Awesome interactive globes for the web",
   "homepage": "http://planetaryjs.com",
