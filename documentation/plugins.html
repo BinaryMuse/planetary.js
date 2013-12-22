@@ -80,7 +80,7 @@
 <h2>Loading Plugins</h2>
 <p>Plugins are loaded either globally by <code>planetaryjs.loadPlugin</code> or for a specific planet instance by <code>planet.loadPlugin</code>. If you call <code>draw</code> on a planet and it has no plugins loaded at all (from either source), Planetary.js will use the default plugin stack, which consists of the <code>earth</code> and <code>pings</code> plugins.</p>
 <h2>Anatomy of a Plugin</h2>
-<p>A plugin is simply a JavaScript function that takes a planet instance as a parameter and performs some predefined operation. <strong>The best plugins do one tiny thing.</strong> If you want a plugin to do a lot of things at once, you should build a plugin that wraps other, smaller plugins; in fact, this is exactly how the <code>earth</code> plugin is built. See the <a href="/documentation/builtin_earth.html">Earth</a> documentation for more details.</p>
+<p>A plugin is simply a JavaScript function that takes a planet instance as a parameter and performs some predefined operation. <strong>The best plugins do one tiny thing.</strong> If you want a plugin to do a lot of things at once, you should build a plugin that wraps other, smaller plugins; in fact, this is exactly how the <code>earth</code> plugin is built. See the <a href="/documentation/builtin_earth.html">Earth Plugin</a> documentation for more details.</p>
 <p>Most of the time, a plugin will implement its behavior by registering callbacks into the planet&#39;s lifecycle hooks. For example, the following simple plugin increments the planet&#39;s projection&#39;s rotation by one degree every tick (this would make for a very fast spinning globe, but demonstrates the idea nicely enough):</p>
 <div class='ui raise segment'>
 <div class='ui red ribbon label'>JavaScript</div>
@@ -113,6 +113,97 @@ planet.loadPlugin(autorotate);</code></pre>
 };
 
 planet.loadPlugin(autorotate(5));</code></pre>
+<p></div></p>
+<h2>Setting Yourself Up</h2>
+<p>If you need to do some work before your plugin is ready to be used, you can add a hook to a planet&#39;s <code>onInit</code> hook to do the necessary setup.</p>
+<div class='ui raise segment'>
+<div class='ui red ribbon label'>JavaScript</div>
+
+<pre><code class="language-javascript">var somePlugin = function(planet) {
+  planet.onInit(function() {
+    doSomeSetupWork();
+  });
+};</code></pre>
+<p></div></p>
+<p>If you need to do some asynchronous setup--such as fetching data with an Ajax request--before your plugin is ready, you can accept an argument to your <code>onInit</code> function. When you&#39;re done setting up, call this function and Planetary.js will continue to initialize the planet. <strong>If you accept the parameter but don&#39;t call it, the initialization process will stop</strong> (and your planet will not work).</p>
+<div class='ui raise segment'>
+<div class='ui red ribbon label'>JavaScript</div>
+
+<pre><code class="language-javascript">var somePlugin = function(planet) {
+  planet.onInit(function(done) {
+    doSomeAsynchronousSetupWork(function() {
+      done();
+    });
+  });
+};</code></pre>
+<p></div></p>
+<h2>Drawing on the Canvas</h2>
+<p>Many plugins will want to draw onto the globe&#39;s canvas; you can do so by registering a function to a planet&#39;s <code>onDraw</code> hook.</p>
+<div class='ui raise segment'>
+<div class='ui red ribbon label'>JavaScript</div>
+
+<pre><code class="language-javascript">var somePlugin = function(planet) {
+  planet.onDraw(function() {
+    planet.withSavedContext(function(context) {
+      context.beginPath();
+      planet.path.context(context)({type: &#39;Sphere&#39;});
+      context.fillStyle = &#39;black&#39;;
+      context.fill();
+    });
+  });
+};</code></pre>
+<p></div></p>
+<p>The planet exposes properties and methods, such as <code>context</code>, <code>path</code>, and <code>withSavedContext</code> to assist with drawing to the canvas. The <a href="/documentation/planet.html">Planet API</a> documentation goes into more detail on individual properties.</p>
+<h3>Drawing Geo Paths</h3>
+<p>As explained in the <code>planet.path</code> documentation on the <a href="/documentation/planet.html">Planet API</a> page, <code>planet.path</code> is a <a href="https://github.com/mbostock/d3/wiki/Geo-Paths"><code>d3.geo.path</code></a> object that can be used to draw geographical geometry onto the canvas. The path will take care of transforming the coordinates to be projected onto the orthographic view of the globe.</p>
+<p>As a demonstration of this technique, the following is a plugin that will take the land data from a TopoJSON data source (stored on <code>planet.plugins.topojson.world</code>), convert it to a GeoJSON feature, and draw it on the planet. This code is similar to (but slightly simplified from) how the <a href="/documentation/builtin_land.html">Land plugin</a> works.</p>
+<div class='ui raise segment'>
+<div class='ui red ribbon label'>JavaScript</div>
+
+<pre><code class="language-javascript">var drawLand = function(planet) {
+  planet.onDraw(function() {
+    planet.withSavedContext(function(context) {
+      var world = planet.plugins.topojson.world;
+      var land = topojson.feature(world, world.objects.land);
+
+      context.beginPath();
+      planet.path.context(context)(land);
+      context.fillStyle = &#39;white&#39;;
+      context.fill();
+    });
+  });
+};</code></pre>
+<p></div></p>
+<h2>Exposing Data and Methods</h2>
+<p>Obviously, you can use private internal variables to keep track of any data your plugin needs to operate. However, if you want to expose a public API to users of your plugin, you should avoid attaching them directly to the planet and instead attach them to the planet&#39;s <code>plugins</code> namespace. You should use a name specific to your plugin, and this name should be well documented in your plugin&#39;s documentation.</p>
+<div class='ui raise segment'>
+<div class='ui red ribbon label'>JavaScript</div>
+
+<pre><code class="language-javascript">var autorotate = function(degreesPerTick) {
+  return function(planet) {
+    var paused = false;
+
+    planet.plugins.autorotate = {
+      pause:  function() { paused = true;  },
+      resume: function() { paused = false; }
+    };
+
+    planet.onDraw(function() {
+      if (paused) return;
+
+      var rotation = planet.projection.rotate();
+      rotation[0] += degreesPerTick;
+      if (rotation[0] &gt;= 180) rotation[0] -= 360;
+      planet.projection.rotate(rotation);
+    });
+  };
+};
+
+planet.loadPlugin(autorotate(5));
+planet.draw(canvas);
+setTimeout(function() {
+  planet.plugins.autorotate.pause();
+}, 5000);</code></pre>
 <p></div></p>
 
       </div>
