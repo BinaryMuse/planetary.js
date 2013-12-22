@@ -2,7 +2,7 @@
  *  Copyright (c) 2013 Brandon Tilley
  *
  *  Released under the MIT license
- *  Date: 2013-12-22T06:44:18.855Z
+ *  Date: 2013-12-22T07:02:54.331Z
  */
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -198,6 +198,7 @@
           }
 
           if (config.stroke) {
+            if (config.lineWidth) context.lineWidth = config.lineWidth;
             context.strokeStyle = config.stroke;
             context.stroke();
           }
@@ -222,6 +223,7 @@
           context.beginPath();
           planet.path.context(context)(borders);
           context.strokeStyle = config.stroke || 'gray';
+          if (config.lineWidth) context.lineWidth = config.lineWidth;
           context.stroke();
         });
       });

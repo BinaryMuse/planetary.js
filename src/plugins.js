@@ -54,6 +54,7 @@
           }
 
           if (config.stroke) {
+            if (config.lineWidth) context.lineWidth = config.lineWidth;
             context.strokeStyle = config.stroke;
             context.stroke();
           }
@@ -78,6 +79,7 @@
           context.beginPath();
           planet.path.context(context)(borders);
           context.strokeStyle = config.stroke || 'gray';
+          if (config.lineWidth) context.lineWidth = config.lineWidth;
           context.stroke();
         });
       });
