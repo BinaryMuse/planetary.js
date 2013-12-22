@@ -105,7 +105,7 @@ planet.onDraw(function() {
   planet.withSavedContext(function(context) {
     context.beginPath();
     planet.path.context(context)({type: 'Sphere'});
-    context.fillStyle = config.fill || 'black';
+    context.fillStyle = 'black';
     context.fill();
   });
 });
