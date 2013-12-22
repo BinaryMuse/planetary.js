@@ -1,6 +1,6 @@
 {
   "name": "planetary.js",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "description": "Awesome interactive globes for the web",
   "scripts": {
     "build": "rm -r dist/ ; gulp && cp dist/planetaryjs.min.js site/public/js/lib",
