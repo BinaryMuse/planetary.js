@@ -36,8 +36,10 @@
     borders:  { stroke: '#001320' }
   }));
   planet.loadPlugin(planetaryjs.plugins.pings({}));
-  planet.loadPlugin(zoom());
-  planet.loadPlugin(drag({
+  planet.loadPlugin(planetaryjs.plugins.zoom({
+    scaleExtent: [50, 5000]
+  }));
+  planet.loadPlugin(planetaryjs.plugins.drag({
     onDragStart: function() {
       planet.plugins.autorotate.pause();
     },
@@ -231,58 +233,6 @@
           planet.projection.rotate(rotation);
           lastTick = now;
         }
-      });
-    };
-  };
-
-  // Plugin to allow zooming with the mouse wheel
-  function zoom(options) {
-    return function(planet) {
-      planet.onInit(function() {
-        var zoom = d3.behavior.zoom()
-          .scale(planet.projection.scale())
-          .scaleExtent([50, 5000])
-          .on('zoom', function() {
-            planet.projection.scale(d3.event.scale);
-          });
-        d3.select(planet.canvas).call(zoom);
-      });
-    };
-  };
-
-  // Plugin to allow rotating the globe by dragging with the mouse
-  function drag(options) {
-    var options = options || {};
-    var noop = function() {};
-    var onDragStart = options.onDragStart || noop;
-    var onDragEnd   = options.onDragEnd   || noop;
-    var onDrag      = options.onDrag      || noop;
-    return function(planet) {
-      planet.onInit(function() {
-        var drag = d3.behavior.drag()
-          .on('dragstart', onDragStart)
-          .on('dragend', onDragEnd)
-          .on('drag', function() {
-            onDrag();
-            var dx = d3.event.dx;
-            var dy = d3.event.dy;
-            var rotation = planet.projection.rotate();
-            var radius = planet.projection.scale();
-            // Dragging from the center of the planet to the edge
-            // of the planet should rotate it 90 degrees
-            var scale = d3.scale.linear()
-              .domain([-1 * radius, radius])
-              .range([-90, 90]);
-            var degX = scale(dx);
-            var degY = scale(dy);
-            rotation[0] += degX;
-            rotation[1] -= degY;
-            if (rotation[1] &gt; 90)   rotation[1] = 90;
-            if (rotation[1] &lt; -90)  rotation[1] = -90;
-            if (rotation[0] &gt;= 180) rotation[0] -= 360;
-            planet.projection.rotate(rotation);
-          });
-        d3.select(planet.canvas).call(drag);
       });
     };
   };
