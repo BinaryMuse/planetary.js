@@ -15,6 +15,11 @@ Requirements
 * [D3](http://d3js.org/) version 3
 * [TopoJSON](https://github.com/mbostock/topojson) version 1
 
+Download
+--------
+
+Download Planetary.js from the [GitHub releases page](https://github.com/BinaryMuse/planetary.js/releases).
+
 Quick Start
 -----------
 
