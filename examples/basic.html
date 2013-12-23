@@ -1,0 +1,82 @@
+<!doctype html>
+<html>
+<head>
+  <title>Planetary.js: Awesome interactive globes for the web</title>
+<link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Open+Sans:300italic,400,300,700' rel='stylesheet' type='text/css'>
+<link type="text/css" rel="stylesheet" href="/semantic/css/semantic.min.css">
+<link type="text/css" rel="stylesheet" href="/css/planetaryjs.css">
+
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+
+  <link href="/css/prism.css" rel="stylesheet">
+</head>
+<body>
+  <div class='ui fixed inverted large menu main-menu'>
+  <div class='items'>
+    <a class='item title' href='/index.html'>
+      <i class='globe icon'></i>Planetary.js
+    </a>
+    <span class='spacer hide-on-mobile'></span>
+    <a class='item minor' href='https://github.com/BinaryMuse/planetary.js/releases'>
+      <i class='download icon'></i><span class='hide-on-mobile'>Download</span>
+    </a>
+    <a class='item minor active' href='/examples/'>
+      <i class='laptop icon'></i><span class='hide-on-mobile'>Examples</span>
+    </a>
+    <a class='item minor ' href='/documentation/'>
+      <i class='book icon'></i><span class='hide-on-mobile'>Documentation</span>
+    </a>
+    <a class='item minor' href='https://github.com/BinaryMuse/planetary.js'>
+      <i class='github alternate icon'></i><span class='hide-on-mobile'>Fork on GitHub</span>
+    </a>
+  </div>
+</div>
+
+
+  <div class='content container'>
+    <div class='page ui slim stackable grid'>
+      <div class='sixteen wide column'>
+        <h1>Basic Globe</h1>
+
+<p>This example shows the minimum code you need to render a basic representation of the planet Earth.</p>
+
+<div style='text-align: center;'>
+  <canvas id='basicGlobe' width='400' height='400'></canvas>
+</div>
+
+<div class='ui raise segment'>
+<div class='ui blue ribbon label'>HTML</div>
+<pre><code class='language-html'>&lt;canvas id='basicGlobe' width='400' height='400'&gt;&lt;/canvas&gt;</code></pre>
+
+<div class='ui red ribbon label'>JavaScript</div>
+<pre><code class='language-javascript'>(function() {
+  var canvas = document.getElementById('basicGlobe');
+  var planet = planetaryjs.planet();
+  // Loading this plugin technically happens automatically,
+  // but we need to specify the path to the `world-110m.json` file.
+  planet.loadPlugin(planetaryjs.plugins.earth({
+    topojson: { file: '/world-110m.json' }
+  }));
+  // Scale the planet's radius to half the canvas' size...
+  planet.projection.scale(canvas.width / 2);
+  // ...and move the planet to the center of the canvas.
+  planet.projection.translate([canvas.width / 2, canvas.height / 2]);
+  planet.draw(canvas);
+})();</code></pre>
+</div>
+
+<script type='text/javascript' src="/js/lib/d3.v3.min.js"></script>
+<script type='text/javascript' src="/js/lib/topojson.v1.min.js"></script>
+<script type="text/javascript" src="/js/lib/planetaryjs.min.js"></script>
+
+<script type='text/javascript' src='/examples/basic.js'></script>
+
+
+      </div>
+    </div>
+  </div>
+  <script type='text/javascript' src='/js/prism.js'></script>
+</body>
+</html>

@@ -61,7 +61,7 @@
           </a>
           <div class='item contains-subitems'>
             <div class='menu'>
-              <a class='item active' href='/documentation/builtin_earth.html'>Earth</a>
+              <a class='item ' href='/documentation/builtin_earth.html'>Earth</a>
               <a class='item ' href='/documentation/builtin_topojson.html'>TopoJSON</a>
               <a class='item ' href='/documentation/builtin_oceans.html'>Oceans</a>
               <a class='item ' href='/documentation/builtin_land.html'>Land</a>
@@ -71,7 +71,7 @@
               <a class='item ' href='/documentation/builtin_drag.html'>Drag</a>
             </div>
           </div>
-          <a class='red item ' href='/documentation/faq.html'>
+          <a class='red item active' href='/documentation/faq.html'>
             FAQ
             <i class='icon help'></i>
           </a>
@@ -83,34 +83,28 @@
       </div>
 
       <div class='twelve wide column'>
-        <h1>Earth Plugin</h1>
-<p>The <code>earth</code> plugin is simply a wrapper around the <code>topojson</code>, <code>oceans</code>, <code>land</code>, and <code>borders</code> plugins. It parses its configuration and passes pieces of it to the individual plugins.</p>
-<h2>API</h2>
-<p><strong><code>planetaryjs.plugins.earth([config])</code></strong></p>
-<p>Valid keys for <code>config</code> are:</p>
-<ul>
-<li><code>topojson</code>: options to pass to the <code>topojson</code> plugin</li>
-<li><code>oceans</code>: options to pass to the <code>oceans</code> plugin</li>
-<li><code>land</code>: options to pass to the <code>land</code> plugin</li>
-<li><code>borders</code>: options to pass to the <code>borders</code> plugin</li>
-</ul>
-<div class='ui raise segment'>
-<div class='ui red ribbon label'>JavaScript</div>
+        <h1>FAQ</h1>
+<p><strong>Q:</strong> Why can&#39;t I access my DOM element?</p>
+<p><strong>A:</strong> Planetary.js provides no methods for DOM access or for waiting for the DOM ready event; you&#39;ll need to handle this on your own or use a third-party library.</p>
+<div class="ui horizontal icon divider">
+  <i class="globe icon"></i>
+</div>
 
-<pre><code class="language-javascript">planetaryjs.plugins.earth({
-  topojson: { file:   &#39;world-110m.json&#39; },
-  oceans:   { fill:   &#39;#000080&#39; },
-  land:     { fill:   &#39;#339966&#39; },
-  borders:  { stroke: &#39;#008000&#39; }
-});</code></pre>
-<p></div></p>
-<p>See also:</p>
-<ul>
-<li><a href="/documentation/builtin_topojson.html">TopoJSON Plugin</a></li>
-<li><a href="/documentation/builtin_oceans.html">Oceans Plugin</a></li>
-<li><a href="/documentation/builtin_land.html">Land Plugin</a></li>
-<li><a href="/documentation/builtin_borders.html">Borders Plugin</a></li>
-</ul>
+<p><strong>Q:</strong> Why doesn&#39;t my <code>canvas</code> element work with Planetary.js?</p>
+<p><strong>A:</strong> Planetary.js asks for raw DOM elements; if you have an element wrapped with jQuery, D3, or a similar library, you&#39;ll need to unwrap it to pass to your
+planet&#39;s <code>draw</code> method.</p>
+<div class="ui horizontal icon divider">
+  <i class="globe icon"></i>
+</div>
+
+<p><strong>Q:</strong> How do I manipulate my globe?</p>
+<p><strong>A:</strong> The planet object has methods and properties for manipulating the globe; most notable is the <code>projection</code> property. See the <a href="/documentation/planet.html">Planet API</a> for more information.</p>
+<div class="ui horizontal icon divider">
+  <i class="globe icon"></i>
+</div>
+
+<p><strong>Q:</strong> I&#39;m getting &quot;Cannot read property &#39;geo&#39; of undefined&quot; or &quot;Cannot call method &#39;feature&#39; of undefined.&quot;</p>
+<p><strong>A:</strong> Ensure you&#39;re requiring the <a href="http://d3js.org/">D3</a> and <a href="https://github.com/mbostock/topojson">TopoJSON</a> libraries before Planetary.js</p>
 
       </div>
     </div>
