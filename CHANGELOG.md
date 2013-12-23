@@ -1,3 +1,6 @@
+v0.2.2
+------
+
 * Add `afterZoom` and `afterDrag` hooks to the `zoom` and `drag` plugins
 
 v0.2.1
