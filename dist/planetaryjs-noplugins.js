@@ -2,7 +2,7 @@
  *  Copyright (c) 2013 Brandon Tilley
  *
  *  Released under the MIT license
- *  Date: 2013-12-22T22:19:14.765Z
+ *  Date: 2013-12-23T22:56:26.417Z
  */
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {

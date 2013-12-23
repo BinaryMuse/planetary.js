@@ -2,7 +2,7 @@
  *  Copyright (c) 2013 Brandon Tilley
  *
  *  Released under the MIT license
- *  Date: 2013-12-22T22:19:14.641Z
+ *  Date: 2013-12-23T22:56:26.493Z
  */
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -312,6 +312,7 @@
     var onZoomStart = options.onZoomStart || noop;
     var onZoomEnd   = options.onZoomEnd   || noop;
     var onZoom      = options.onZoom      || noop;
+    var afterZoom   = options.afterZoom   || noop;
     var startScale  = options.initialScale;
     var scaleExtent = options.scaleExtent || [50, 2000];
 
@@ -330,6 +331,7 @@
           .on('zoom', function() {
             onZoom();
             planet.projection.scale(d3.event.scale);
+            afterZoom();
           });
         d3.select(planet.canvas).call(zoom);
       });
@@ -342,6 +344,7 @@
     var onDragStart = options.onDragStart || noop;
     var onDragEnd   = options.onDragEnd   || noop;
     var onDrag      = options.onDrag      || noop;
+    var afterDrag   = options.afterDrag   || noop;
 
     return function(planet) {
       planet.onInit(function() {
@@ -365,6 +368,7 @@
             if (rotation[1] < -90)  rotation[1] = -90;
             if (rotation[0] >= 180) rotation[0] -= 360;
             planet.projection.rotate(rotation);
+            afterDrag();
           });
         d3.select(planet.canvas).call(drag);
       });
