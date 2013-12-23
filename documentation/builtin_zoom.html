@@ -91,7 +91,7 @@
 <ul>
 <li><code>initialScale</code>: the value to initialize the <a href="https://github.com/mbostock/d3/wiki/Zoom-Behavior"><code>d3.behavior.zoom</code></a> object&#39;s scale to; defaults to the scale of the planet&#39;s projection at the time the planet is initialized</li>
 <li><code>scaleExtent</code>: the value to use for the <code>d3.behavior.zoom</code> object&#39;s <code>scaleExtent</code> property, which defines how far in and out the planet can be zoomed; defaults to <code>[50, 2000]</code></li>
-<li><code>onZoom</code>, <code>onZoomStart</code>, <code>onZoomEnd</code>: hooks to the <code>d3.behavior.zoom</code> object&#39;s <code>zoom</code>, <code>zoomstart</code>, and <code>zoomend</code> events; each defaults to a no-op</li>
+<li><code>onZoomStart</code>, <code>onZoomEnd</code>, <code>onZoom</code>, <code>afterZoom</code>: hooks to the <code>d3.behavior.zoom</code> object&#39;s <code>zoomstart</code>, <code>zoomend</code>, and <code>zoom</code> events; each defaults to a no-op. <code>onZoom</code> fires at the start of the <code>zoom</code> event, <code>afterZoom</code> at the end.</li>
 </ul>
 <div class='ui raise segment'>
 <div class='ui red ribbon label'>JavaScript</div>
