@@ -1,3 +1,6 @@
+v1.0.0-rc.1 (2013/12/24)
+------------------------
+
 * `zoom` plugin's `initialScale` can be set to `0`
 
 v0.3.0
