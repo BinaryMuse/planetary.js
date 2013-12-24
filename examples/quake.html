@@ -40,7 +40,7 @@
       <div class='sixteen wide column'>
         <h1>2013 Earthquake Data</h1>
 
-<p>This is a more advanced example of what can be built with Planetary.js. The demo sets up a globe with some custom plugins (defined at the bottom of the JavaScript), and also demonstrates some non-Planetary.js-specific techniques, like D3 scales, DOM manipulation, and loading external data.</p>
+<p>This is a more advanced example of what can be built with Planetary.js. The demo sets up a globe with some custom plugins (defined at the bottom of the JavaScript), and also demonstrates some non-Planetary.js-specific techniques, like the use of [Moment.js](http://momentjs.com/), D3 scales, DOM manipulation, and loading external data.</p>
 
 <p><a href="/examples/quake/index.html">View the demo</a></p>
 
@@ -52,7 +52,7 @@
 
 &lt;div id='controls'&gt;
   &lt;div&gt;
-    &lt;input id='slider' type='range' min='0' max='100' value='0'&gt;
+    &lt;input id='slider' type='range' min='0' max='100' step='0.1' value='0'&gt;
   &lt;/div&gt;
   &lt;div&gt;
     &lt;span id='date'&gt;&lt;/span&gt;&amp;nbsp;
@@ -140,6 +140,10 @@
     var currentTime = start;
     var lastTick = new Date().getTime();
 
+    var updateDate = function() {
+      d3.select('#date').text(moment(currentTime).utc().format(&quot;MMM DD YYYY HH:mm UTC&quot;));
+    };
+
     // A scale that maps a percentage of playback to a time
     // from the data; for example, `50` would map to the halfway
     // mark between the first and last items in our data array.
@@ -161,7 +165,7 @@
     d3.select('#slider')
       .on('change', function(d) {
         currentTime = percentToDate(d3.event.target.value);
-        d3.select('#date').text(new Date(currentTime));
+        updateDate();
       })
       .call(d3.behavior.drag()
         .on('dragstart', function() {
@@ -209,7 +213,7 @@
 
       currentTime += dataDelta;
       if (currentTime &gt; end) currentTime = start;
-      d3.select('#date').text(new Date(currentTime));
+      updateDate();
       d3.select('#slider').property('value', percentToDate.invert(currentTime));
       lastTick = now;
     });
