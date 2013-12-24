@@ -2,17 +2,17 @@
 
 <p>This code shows the example from the homepage, which rotates, shows randomly positioned, colored, and sized pings on the globe, and supports mouse-based dragging and zooming. It also shows the creation and use of a plugin, which powers the automatic rotation and exposes a public API.</p>
 
-<p>The demo also shows how you can keep your globe from looking pixelated on high density displays my changing the canvas' width and height but keeping its <em>displayed</em> width and height the same via CSS styling.</p>
+<p>The demo also shows how you can keep your globe from looking pixelated on high density displays by changing the canvas' width and height but keeping its <em>displayed</em> width and height the same via CSS styling.</p>
 
 <div style='text-align: center;'>
   <canvas id='rotatingGlobe' width='400' height='400'
-    style="width: 400px; height: 400px;"></canvas>
+    style="width: 400px; height: 400px; cursor: move;"></canvas>
 </div>
 
 <div class='ui raise segment'>
 <div class='ui blue ribbon label'>HTML</div>
 <pre><code class='language-html'>&lt;canvas id='basicGlobe' width='400' height='400'
-  style='width: 400px; height: 400px;'&gt;&lt;/canvas&gt;</code></pre>
+  style='width: 400px; height: 400px; cursor: move;'&gt;&lt;/canvas&gt;</code></pre>
 
 <div class='ui red ribbon label'>JavaScript</div>
 <pre><code class='language-javascript'>(function() {
