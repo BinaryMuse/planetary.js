@@ -34,7 +34,7 @@ planet.projection
 
 **`planet.path`**
 
-`planet.path` is a [`d3.geo.path`](https://github.com/mbostock/d3/wiki/Geo-Paths) which uses the planet's internal projection to generate path data for geographical features. Its `context` method is commonly used by interal plugins to take a canvas context and return a path generator that can be used to draw on the globe.
+`planet.path` is a [`d3.geo.path`](https://github.com/mbostock/d3/wiki/Geo-Paths) which uses the planet's internal projection to generate path data for geographical features. Its `context` method is commonly used by internal plugins to take a canvas context and return a path generator that can be used to draw on the globe.
 
 <div class='ui raise segment'>
 <div class='ui red ribbon label'>JavaScript</div>
@@ -95,7 +95,7 @@ planet.onDraw(function() {
 
 **`planet.withSavedContext( function(context){} )`**
 
-Calls the function with the current canvas context as a paremter, wrapping the function call in `context.save()` and `context.restore()`. Use this function any time you're going to modify the context to ensure it gets put back to the way it was.
+Calls the function with the current canvas context as a parameter, wrapping the function call in `context.save()` and `context.restore()`. Use this function any time you're going to modify the context to ensure it gets put back to the way it was.
 
 <div class='ui raise segment'>
 <div class='ui red ribbon label'>JavaScript</div>

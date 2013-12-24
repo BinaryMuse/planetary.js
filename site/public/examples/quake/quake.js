@@ -30,21 +30,21 @@
 
 
   // Create a color scale for the various earthquake magnitudes; the
-  // mininum magnitude in our data set is 2.5.
+  // minimum magnitude in our data set is 2.5.
   var colors = d3.scale.pow()
     .exponent(2)
     .domain([2, 6,10])
       .range(['rgb(255,255,204)', 'rgb(253,141,60)','rgb(128,0,38)'])
     .clamp(true);
-  // Also create a scale for mapping magnitues to ping angle sizes
+  // Also create a scale for mapping magnitudes to ping angle sizes
   var angles = d3.scale.pow()
     .exponent(2)
     .domain([2.5, 10])
     .range([0.5, 15])
     .clamp(true);
 
-  // Create a key to show the magnitues and their colors
-  d3.select('#magnitues').selectAll('li')
+  // Create a key to show the magnitudes and their colors
+  d3.select('#magnitudes').selectAll('li')
     .data(colors.ticks(9))
   .enter()
     .append('li')
