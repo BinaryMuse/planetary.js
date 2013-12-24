@@ -2,7 +2,7 @@
  *  Copyright (c) 2013 Brandon Tilley
  *
  *  Released under the MIT license
- *  Date: 2013-12-24T16:27:25.159Z
+ *  Date: 2013-12-24T16:28:54.653Z
  */
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -330,7 +330,7 @@
         var zoom = d3.behavior.zoom()
           .scaleExtent(scaleExtent);
 
-        if (startScale) {
+        if (startScale !== null && startScale !== undefined) {
           zoom.scale(startScale);
         } else {
           zoom.scale(planet.projection.scale());

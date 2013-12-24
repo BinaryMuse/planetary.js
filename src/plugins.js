@@ -186,7 +186,7 @@
         var zoom = d3.behavior.zoom()
           .scaleExtent(scaleExtent);
 
-        if (startScale) {
+        if (startScale !== null && startScale !== undefined) {
           zoom.scale(startScale);
         } else {
           zoom.scale(planet.projection.scale());
