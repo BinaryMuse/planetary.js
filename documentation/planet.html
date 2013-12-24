@@ -104,7 +104,7 @@ planet.loadPlugin(somePluginGenerator());</code></pre>
   .rotate([60, -10, 0]);</code></pre>
 <p></div></p>
 <p><strong><code>planet.path</code></strong></p>
-<p><code>planet.path</code> is a <a href="https://github.com/mbostock/d3/wiki/Geo-Paths"><code>d3.geo.path</code></a> which uses the planet&#39;s internal projection to generate path data for geographical features. Its <code>context</code> method is commonly used by interal plugins to take a canvas context and return a path generator that can be used to draw on the globe.</p>
+<p><code>planet.path</code> is a <a href="https://github.com/mbostock/d3/wiki/Geo-Paths"><code>d3.geo.path</code></a> which uses the planet&#39;s internal projection to generate path data for geographical features. Its <code>context</code> method is commonly used by internal plugins to take a canvas context and return a path generator that can be used to draw on the globe.</p>
 <div class='ui raise segment'>
 <div class='ui red ribbon label'>JavaScript</div>
 
@@ -145,7 +145,7 @@ planet.onInit(function(done) {
 });</code></pre>
 <p></div></p>
 <p><strong><code>planet.withSavedContext( function(context){} )</code></strong></p>
-<p>Calls the function with the current canvas context as a paremter, wrapping the function call in <code>context.save()</code> and <code>context.restore()</code>. Use this function any time you&#39;re going to modify the context to ensure it gets put back to the way it was.</p>
+<p>Calls the function with the current canvas context as a parameter, wrapping the function call in <code>context.save()</code> and <code>context.restore()</code>. Use this function any time you&#39;re going to modify the context to ensure it gets put back to the way it was.</p>
 <div class='ui raise segment'>
 <div class='ui red ribbon label'>JavaScript</div>
 

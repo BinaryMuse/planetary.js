@@ -18,7 +18,7 @@
     scaleExtent: [100, 300]
   }));
   globe.loadPlugin(planetaryjs.plugins.drag({
-    // Dragging the globe shoud pause the
+    // Dragging the globe should pause the
     // automatic rotation until we release the mouse.
     onDragStart: function() {
       globe.plugins.autorotate.pause();
@@ -36,7 +36,7 @@
     var lat = Math.random() * 170 - 85;
     var lng = Math.random() * 360 - 180;
     var color = colors[Math.floor(Math.random() * colors.length)];
-    globe.plugins.pings.add(lat, lng, { color: color, ttl: 2000, angle: Math.random() * 10 });
+    globe.plugins.pings.add(lng, lat, { color: color, ttl: 2000, angle: Math.random() * 10 });
   }, 250);
 
   var canvas = document.getElementById('homepage-globe-canvas');

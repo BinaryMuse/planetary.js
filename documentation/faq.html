@@ -84,6 +84,12 @@
 
       <div class='twelve wide column'>
         <h1>FAQ</h1>
+<p><strong>Q:</strong> Why are the pings I add from the <a href="/documentation/builtin_pings.html">Pings plugin</a> in the wrong place?</p>
+<p><strong>A:</strong> Like D3 on which it is based, Planetary.js accepts coordinates with the longitudinal coordinate first. You can set the <code>latitudeFirst</code> option in the plugin configuration to change this. There is some additional discussion on the subject in the <a href="/documentation/builtin_pings.html">Pings plugin documentation</a>.</p>
+<div class="ui horizontal icon divider">
+  <i class="globe icon"></i>
+</div>
+
 <p><strong>Q:</strong> Why can&#39;t I access my DOM element?</p>
 <p><strong>A:</strong> Planetary.js provides no methods for DOM access or for waiting for the DOM ready event; you&#39;ll need to handle this on your own or use a third-party library.</p>
 <div class="ui horizontal icon divider">
