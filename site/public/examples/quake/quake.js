@@ -77,6 +77,10 @@
     var currentTime = start;
     var lastTick = new Date().getTime();
 
+    var updateDate = function() {
+      d3.select('#date').text(moment(currentTime).utc().format("MMM DD YYYY HH:mm UTC"));
+    };
+
     // A scale that maps a percentage of playback to a time
     // from the data; for example, `50` would map to the halfway
     // mark between the first and last items in our data array.
@@ -98,7 +102,7 @@
     d3.select('#slider')
       .on('change', function(d) {
         currentTime = percentToDate(d3.event.target.value);
-        d3.select('#date').text(new Date(currentTime));
+        updateDate();
       })
       .call(d3.behavior.drag()
         .on('dragstart', function() {
@@ -146,7 +150,7 @@
 
       currentTime += dataDelta;
       if (currentTime > end) currentTime = start;
-      d3.select('#date').text(new Date(currentTime));
+      updateDate();
       d3.select('#slider').property('value', percentToDate.invert(currentTime));
       lastTick = now;
     });
