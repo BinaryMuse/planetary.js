@@ -4,7 +4,7 @@
 
   var doDrawLoop = function(planet, canvas, hooks) {
     d3.timer(function() {
-      planet.context.clearRect(0, 0, canvas.width, canvas.height)
+      planet.context.clearRect(0, 0, canvas.width, canvas.height);
       for (var i = 0; i < hooks.onDraw.length; i++) {
         hooks.onDraw[i]();
       }
@@ -18,14 +18,14 @@
     }
 
     // Load the default plugins if none have been loaded so far
-    if (localPlugins.length == 0) {
+    if (localPlugins.length === 0) {
       if (planetaryjs.plugins.earth)
         planet.loadPlugin(planetaryjs.plugins.earth());
       if (planetaryjs.plugins.pings)
         planet.loadPlugin(planetaryjs.plugins.pings());
     }
 
-    for (var i = 0; i < localPlugins.length; i++) {
+    for (i = 0; i < localPlugins.length; i++) {
       localPlugins[i](planet);
     }
   };
@@ -51,7 +51,7 @@
       var check = function() {
         if (completed >= hooks.onInit.length) doDrawLoop(planet, canvas, hooks);
         else doNext(check);
-      }
+      };
       doNext(check);
     } else {
       doDrawLoop(planet, canvas, hooks);
@@ -107,7 +107,7 @@
 
         withSavedContext: function(fn) {
           if (!this.context) {
-            throw new Error("No canvas to fetch context for")
+            throw new Error("No canvas to fetch context for");
           }
 
           this.context.save();

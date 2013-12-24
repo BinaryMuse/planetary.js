@@ -7,7 +7,7 @@
           planet.plugins.topojson.world = config.world;
           setTimeout(done, 0);
         } else {
-          var file = config.file || 'world-110m.json'
+          var file = config.file || 'world-110m.json';
           d3.json(file, function(err, world) {
             if (err) {
               throw new Error("Could not load JSON " + file);
@@ -41,14 +41,14 @@
       planet.onInit(function() {
         var world = planet.plugins.topojson.world;
         land = topojson.feature(world, world.objects.land);
-      })
+      });
 
       planet.onDraw(function() {
         planet.withSavedContext(function(context) {
           context.beginPath();
           planet.path.context(context)(land);
 
-          if (config.fill != false) {
+          if (config.fill !== false) {
             context.fillStyle = config.fill || 'white';
             context.fill();
           }
@@ -98,7 +98,7 @@
   };
 
   planetaryjs.plugins.earth = function(config) {
-    var config = config || {};
+    config = config || {};
     var topojsonOptions = config.topojson || {};
     var oceanOptions = config.oceans || {};
     var landOptions = config.land || {};
@@ -114,10 +114,10 @@
 
   planetaryjs.plugins.pings = function(config) {
     var pings = [];
-    var config = config || {};
+    config = config || {};
 
     var addPing = function(lng, lat, options) {
-      var options = options || {};
+      options = options || {};
       options.color = options.color || config.color || 'white';
       options.angle = options.angle || config.angle || 5;
       options.ttl   = options.ttl   || config.ttl   || 2000;
@@ -172,7 +172,7 @@
   };
 
   planetaryjs.plugins.zoom = function (options) {
-    var options = options || {};
+    options = options || {};
     var noop = function() {};
     var onZoomStart = options.onZoomStart || noop;
     var onZoomEnd   = options.onZoomEnd   || noop;
@@ -185,11 +185,13 @@
       planet.onInit(function() {
         var zoom = d3.behavior.zoom()
           .scaleExtent(scaleExtent);
+
         if (startScale) {
           zoom.scale(startScale);
         } else {
           zoom.scale(planet.projection.scale());
         }
+
         zoom
           .on('zoomstart', onZoomStart)
           .on('zoomend', onZoomEnd)
@@ -204,7 +206,7 @@
   };
 
   planetaryjs.plugins.drag = function(options) {
-    var options = options || {};
+    options = options || {};
     var noop = function() {};
     var onDragStart = options.onDragStart || noop;
     var onDragEnd   = options.onDragEnd   || noop;

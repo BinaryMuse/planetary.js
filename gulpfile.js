@@ -3,6 +3,7 @@ var uglify = require('gulp-uglify');
 var concat = require('gulp-concat');
 var rename = require('gulp-rename');
 var header = require('gulp-header');
+var jshint = require('gulp-jshint');
 var metadata = require('./package.json');
 
 var shortHeader = "/*! Planetary.js {{version}} | (c) 2013 Brandon Tilley | Released under MIT License */"
@@ -25,6 +26,12 @@ function build(source, name, headerText, minify) {
   js.pipe(gulp.dest('./dist'));
 }
 
+gulp.task('jshint', function() {
+  gulp.src(['./src/body.js', './src/plugins.js'])
+    .pipe(jshint())
+    .pipe(jshint.reporter('default'));
+});
+
 gulp.task('build', function() {
   build(fullSource, 'planetaryjs.js', fullHeader, false);
   build(fullSource, 'planetaryjs.min.js', shortHeader, true);
@@ -35,5 +42,6 @@ gulp.task('build', function() {
 });
 
 gulp.task('default', function() {
+  gulp.run('jshint');
   gulp.run('build');
 });
