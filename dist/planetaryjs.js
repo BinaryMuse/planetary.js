@@ -2,7 +2,7 @@
  *  Copyright (c) 2013 Brandon Tilley
  *
  *  Released under the MIT license
- *  Date: 2013-12-23T23:11:47.446Z
+ *  Date: 2013-12-24T06:07:53.694Z
  */
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -258,13 +258,22 @@
 
   planetaryjs.plugins.pings = function(config) {
     var pings = [];
+    var config = config || {};
 
-    var addPing = function(lat, lng, options) {
+    var addPing = function(lng, lat, options) {
       var options = options || {};
       options.color = options.color || config.color || 'white';
-      options.ttl = options.ttl || config.ttl || 2000;
       options.angle = options.angle || config.angle || 5;
-      pings.push({ lat: lat, lng: lng, time: new Date(), options: options });
+      options.ttl   = options.ttl   || config.ttl   || 2000;
+      var ping = { time: new Date(), options: options };
+      if (config.latitudeFirst) {
+        ping.lat = lng;
+        ping.lng = lat;
+      } else {
+        ping.lng = lng;
+        ping.lat = lat;
+      }
+      pings.push(ping);
     };
 
     var drawPings = function(planet, context, now) {

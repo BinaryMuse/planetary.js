@@ -1,3 +1,5 @@
+* Reverse the order of `lat` and `lng` parameters of the `add` method of the `pings` plugin
+
 v0.2.2
 ------
 

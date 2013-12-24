@@ -132,7 +132,7 @@
 
       for (var i = 0; i < toPing.length; i++) {
         var ping = toPing[i];
-        planet.plugins.pings.add(ping.lat, ping.lng, {
+        planet.plugins.pings.add(ping.lng, ping.lat, {
           // Here we use the `angles` and `colors` scales we built earlier
           // to convert magnitudes to appropriate angles and colors.
           angle: angles(ping.mag),
