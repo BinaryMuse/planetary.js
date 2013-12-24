@@ -95,16 +95,19 @@
   // Create a color scale for the various earthquake magnitudes; the
   // minimum magnitude in our data set is 2.5.
   var colors = d3.scale.pow()
-    .exponent(2)
-    .domain([2, 6,10])
-      .range(['rgb(255,255,204)', 'rgb(253,141,60)','rgb(128,0,38)'])
-    .clamp(true);
+    .exponent(3)
+    .domain([2, 6, 10])
+      .range(['yellow', 'orange', 'red']);
   // Also create a scale for mapping magnitudes to ping angle sizes
   var angles = d3.scale.pow()
-    .exponent(2)
+    .exponent(3)
     .domain([2.5, 10])
-    .range([0.5, 15])
-    .clamp(true);
+    .range([0.5, 15]);
+  // And finally, a scale for mapping magnitudes to ping TTLs
+  var ttls = d3.scale.pow()
+    .exponent(3)
+    .domain([2.5, 10])
+    .range([2000, 5000]);
 
   // Create a key to show the magnitudes and their colors
   d3.select('#magnitudes').selectAll('li')
@@ -199,7 +202,8 @@
           // Here we use the `angles` and `colors` scales we built earlier
           // to convert magnitudes to appropriate angles and colors.
           angle: angles(ping.mag),
-          color: colors(ping.mag)
+          color: colors(ping.mag),
+          ttl:   ttls(ping.mag)
         });
       }
 
