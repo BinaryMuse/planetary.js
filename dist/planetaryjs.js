@@ -2,7 +2,7 @@
  *  Copyright (c) 2013 Brandon Tilley
  *
  *  Released under the MIT license
- *  Date: 2013-12-25T05:19:01.305Z
+ *  Date: 2013-12-25T05:32:20.749Z
  */
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -337,12 +337,12 @@
         }
 
         zoom
-          .on('zoomstart', onZoomStart)
-          .on('zoomend', onZoomEnd)
+          .on('zoomstart', onZoomStart.bind(planet))
+          .on('zoomend', onZoomEnd.bind(planet))
           .on('zoom', function() {
-            onZoom();
+            onZoom.call(planet);
             planet.projection.scale(d3.event.scale);
-            afterZoom();
+            afterZoom.call(planet);
           });
         d3.select(planet.canvas).call(zoom);
       });
@@ -360,10 +360,10 @@
     return function(planet) {
       planet.onInit(function() {
         var drag = d3.behavior.drag()
-          .on('dragstart', onDragStart)
-          .on('dragend', onDragEnd)
+          .on('dragstart', onDragStart.bind(planet))
+          .on('dragend', onDragEnd.bind(planet))
           .on('drag', function() {
-            onDrag();
+            onDrag.call(planet);
             var dx = d3.event.dx;
             var dy = d3.event.dy;
             var rotation = planet.projection.rotate();
@@ -379,7 +379,7 @@
             if (rotation[1] < -90)  rotation[1] = -90;
             if (rotation[0] >= 180) rotation[0] -= 360;
             planet.projection.rotate(rotation);
-            afterDrag();
+            afterDrag.call(planet);
           });
         d3.select(planet.canvas).call(drag);
       });

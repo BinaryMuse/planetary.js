@@ -1,3 +1,6 @@
+* Fix load order of global plugins
+* Expose planet instance as `this` in event callbacks
+
 v1.0.0-rc.1 (2013/12/24)
 ------------------------
 

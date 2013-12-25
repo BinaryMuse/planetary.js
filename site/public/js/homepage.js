@@ -20,11 +20,11 @@
   globe.loadPlugin(planetaryjs.plugins.drag({
     // Dragging the globe should pause the
     // automatic rotation until we release the mouse.
-    onDragStart: function() {
-      globe.plugins.autorotate.pause();
+    onDragStart: function(planet) {
+      this.plugins.autorotate.pause();
     },
-    onDragEnd: function() {
-      globe.plugins.autorotate.resume();
+    onDragEnd: function(planet) {
+      this.plugins.autorotate.resume();
     }
   }))
   // Set up the globe's initial scale, offset, and rotation.

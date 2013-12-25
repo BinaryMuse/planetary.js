@@ -38,12 +38,12 @@
     // Dragging the globe should pause the
     // automatic rotation until we release the mouse.
     onDragStart: function() {
-      globe.plugins.autorotate.pause();
+      this.plugins.autorotate.pause();
     },
     onDragEnd: function() {
-      globe.plugins.autorotate.resume();
+      this.plugins.autorotate.resume();
     }
-  }))
+  }));
   // Set up the globe's initial scale, offset, and rotation.
   globe.projection.scale(175).translate([175, 175]).rotate([0, -10, 0]);
 

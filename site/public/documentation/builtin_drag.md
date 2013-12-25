@@ -10,7 +10,7 @@ API
 
 Valid keys for `config` are:
 
-* `onDragStart`, `onDragEnd`, `onDrag`, `afterDrag`: hooks to the `d3.behavior.drag` object's `dragstart`, `dragend`, and `drag` events; each defaults to a no-op. `onDrag` fires at the start of the `drag` event, `afterDrag` at the end.
+* `onDragStart`, `onDragEnd`, `onDrag`, `afterDrag`: hooks to the `d3.behavior.drag` object's `dragstart`, `dragend`, and `drag` events; each defaults to a no-op. `onDrag` fires at the start of the `drag` event, `afterDrag` at the end. The planet instance is available as `this` inside the each of the functions.
 
 <div class='ui raise segment'>
 <div class='ui red ribbon label'>JavaScript</div>
