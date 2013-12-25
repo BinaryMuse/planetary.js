@@ -82,10 +82,10 @@
   }));
   planet.loadPlugin(planetaryjs.plugins.drag({
     onDragStart: function() {
-      planet.plugins.autorotate.pause();
+      this.plugins.autorotate.pause();
     },
     onDragEnd: function() {
-      planet.plugins.autorotate.resume();
+      this.plugins.autorotate.resume();
     }
   }));
   planet.loadPlugin(autorotate(5));
