@@ -2,7 +2,7 @@
  *  Copyright (c) 2013 Brandon Tilley
  *
  *  Released under the MIT license
- *  Date: 2013-12-24T16:35:58.999Z
+ *  Date: 2013-12-25T05:19:01.534Z
  */
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -30,7 +30,7 @@
 
   var initPlugins = function(planet, localPlugins) {
     // Add the global plugins to the beginning of the local ones
-    for (var i = 0; i < plugins.length; i++) {
+    for (var i = plugins.length - 1; i >= 0; i--) {
       localPlugins.unshift(plugins[i]);
     }
 

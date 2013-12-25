@@ -13,7 +13,7 @@
 
   var initPlugins = function(planet, localPlugins) {
     // Add the global plugins to the beginning of the local ones
-    for (var i = 0; i < plugins.length; i++) {
+    for (var i = plugins.length - 1; i >= 0; i--) {
       localPlugins.unshift(plugins[i]);
     }
 
