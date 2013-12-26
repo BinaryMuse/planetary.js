@@ -18,7 +18,7 @@ Requirements
 Download
 --------
 
-Download Planetary.js from the [GitHub releases page](https://github.com/BinaryMuse/planetary.js/releases).
+Download Planetary.js from the [Planetary.js web site](http://planetaryjs.com/download/).
 
 Quick Start
 -----------

@@ -13,7 +13,7 @@ API
 Valid keys for `config` are:
 
 * `world`: a JavaScript object representing TopoJSON data (not JSON data); defaults to no value, which will cause the plugin to load data from the `file` configuration option
-* `file`: the path to a TopoJSON data file to be loaded via Ajax; defaults to `"world-110m.json"`, which can be downloaded with the Planetary.js library from the [download page](https://github.com/BinaryMuse/planetary.js/releases).
+* `file`: the path to a TopoJSON data file to be loaded via Ajax; defaults to `"world-110m.json"`, which can be downloaded with the Planetary.js library from the [download page](/download/).
 
 If you plan on creating more than one planet from the same TopoJSON data, you can load the data once before loading the plugin and pass the parsed data to the plugin via the `world` property rather than letting the plugin load the data via Ajax each time a new planet is created.
 

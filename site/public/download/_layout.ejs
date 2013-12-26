@@ -1,0 +1,19 @@
+<!doctype html>
+<html>
+<head>
+  <%- partial("../_header") %>
+  <link href="/css/prism.css" rel="stylesheet">
+</head>
+<body>
+  <%- partial("../_menu") %>
+
+  <div class='content container'>
+    <div class='page ui slim stackable grid'>
+      <div class='sixteen wide column'>
+        <%- yield %>
+      </div>
+    </div>
+  </div>
+  <%- partial("../_ga") %>
+</body>
+</html>

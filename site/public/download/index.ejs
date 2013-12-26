@@ -1,0 +1,77 @@
+<% data = public.download._data %>
+<% dl = function(version, file) { %>
+<%   return "https://github.com/BinaryMuse/planetary.js/releases/download/" + version + "/" + file; %>
+<% } %>
+
+<h1>Download Planetary.js</h1>
+
+<p>Download the core Planetary.js library and supporting files here.</p>
+
+<p>Up-to-the-minute releases, archived versions, and full release notes can be found <a href='https://github.com/BinaryMuse/planetary.js/releases'>on the GitHub releases page</a>.</p>
+
+<% if (data.stable.latest) { %>
+  <h2>Latest Stable Build: <%= data.stable.latest.version %> (<%= data.stable.latest.name %>)</h2>
+
+  <div class='ui list download-list'>
+    <div class='item'>
+      <i class='icon download'></i>
+      Core library: [
+      <a href='<%= dl(data.stable.latest.version, 'planetaryjs.min.js') %>'>minified</a>
+      |
+      <a href='<%= dl(data.stable.latest.version, 'planetaryjs.js') %>'>unminified</a>
+      ]
+    </div>
+    <div class='item'>
+      <i class='icon download'></i>
+      Core library (no plugins): [
+      <a href='<%= dl(data.stable.latest.version, 'planetaryjs-noplugins.min.js') %>'>minified</a>
+      |
+      <a href='<%= dl(data.stable.latest.version, 'planetaryjs-noplugins.js') %>'>unminified</a>
+      ]
+    </div>
+    <div class='item'>
+      <i class='icon download'></i>
+      Earth TopoJSON data: [
+      <a href='<%= dl(data.stable.latest.version, 'world-110m.json') %>'>minified</a>
+      ]
+    </div>
+  </div>
+
+<% } else { %>
+  <h2>No stable builds yet</h2>
+<% } %>
+
+
+
+
+<% if (data.unstable.latest) { %>
+  <h2>Latest Unstable Build: <%= data.unstable.latest.version %></h2>
+
+  <div class='ui list download-list'>
+    <div class='item'>
+      <i class='icon download'></i>
+      Core library: [
+      <a href='<%= dl(data.unstable.latest.version, 'planetaryjs.min.js') %>'>minified</a>
+      |
+      <a href='<%= dl(data.unstable.latest.version, 'planetaryjs.js') %>'>unminified</a>
+      ]
+    </div>
+    <div class='item'>
+      <i class='icon download'></i>
+      Core library (no plugins): [
+      <a href='<%= dl(data.unstable.latest.version, 'planetaryjs-noplugins.min.js') %>'>minified</a>
+      |
+      <a href='<%= dl(data.unstable.latest.version, 'planetaryjs-noplugins.js') %>'>unminified</a>
+      ]
+    </div>
+    <div class='item'>
+      <i class='icon download'></i>
+      Earth TopoJSON data: [
+      <a href='<%= dl(data.unstable.latest.version, 'world-110m.json') %>'>minified</a>
+      ]
+    </div>
+  </div>
+
+<% } else { %>
+  <h2>No unstable builds yet</h2>
+<% } %>
