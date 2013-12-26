@@ -1,13 +1,13 @@
 Planet API
 ==========
 
-A "planet" represents a single globe and its rendering instructions. It is created from the `planetaryjs.planet()` method; see the [Core API](/documentation/core.html) documentation for more details.
+A "planet" represents a single globe and its rendering instructions. It is created from the `planetaryjs.planet` method; see the [Core API documentation](/documentation/core.html) for more details.
 
 **`planet.loadPlugin(plugin)`**
 
 Planetary.js uses a plugin architecture for all its functionality. While you can load plugins at the global library level, Planetary.js also allows you to load plugins for specific planets. **If a planet is drawn and no plugins have been loaded globally and no plugins have been loaded for the specific planet instance, it will use the default `earth` and `pings` plugins.**
 
-<div class='ui raise segment'>
+<div class='ui raised segment'>
 <div class='ui red ribbon label'>JavaScript</div>
 
 ```javascript
@@ -16,18 +16,19 @@ planet.loadPlugin(somePluginGenerator());
 ```
 </div>
 
-For more information on the plugin system and API, please see the [Plugins](/documentation/plugins.html) documentation.
+For more information on the plugin system and API, please see the [Plugins documentation](/documentation/plugins.html).
 
 **`planet.projection`**
 
 The core of a planet's data model is an [`d3.geo.projection`](https://github.com/mbostock/d3/wiki/Geo-Projections) (specifically, an orthographic projection), which is exposed by a planet by `planet.projection`. You can use this object to control various aspects of the planet. The D3 documentation covers the methods in considerable detail, so [be sure to check it out](https://github.com/mbostock/d3/wiki/Geo-Projections); many of the examples on this site also use the projection object to operate.
 
-<div class='ui raise segment'>
+<div class='ui raised segment'>
 <div class='ui red ribbon label'>JavaScript</div>
 
 ```javascript
 planet.projection
   .scale(width / 2)
+  .translate([width / 2, height / 2])
   .rotate([60, -10, 0]);
 ```
 </div>
@@ -36,7 +37,7 @@ planet.projection
 
 `planet.path` is a [`d3.geo.path`](https://github.com/mbostock/d3/wiki/Geo-Paths) which uses the planet's internal projection to generate path data for geographical features. Its `context` method is commonly used by internal plugins to take a canvas context and return a path generator that can be used to draw on the globe.
 
-<div class='ui raise segment'>
+<div class='ui raised segment'>
 <div class='ui red ribbon label'>JavaScript</div>
 
 ```javascript
@@ -56,11 +57,11 @@ Once you call `draw` on a planet instance, Planetary.js will set the `canvas` an
 
 **`planet.onInit( function([done]){} )`**
 
-Registers a function to be called when the planet is initialized (which happens after a call to `draw` and after any loaded plugins have been initialized). This is mostly used by plugins to initialize themselves when the planet "boots."
+Registers a function to be called when the planet is initialized (which happens after a call to `draw` and after any registered plugins have been loaded). This is mostly used by plugins to initialize themselves when the planet "boots."
 
 If the provided callback function takes any parameters, it will be a "done" function that must be called once the initialization function finishes any asynchronous work before the planet will continue to initialize.
 
-<div class='ui raise segment'>
+<div class='ui raised segment'>
 <div class='ui red ribbon label'>JavaScript</div>
 
 ```javascript
@@ -80,7 +81,7 @@ planet.onInit(function(done) {
 
 Registers a function to be called each time the globe redraws itself. This is mostly used by plugins to draw plugin-specific data or otherwise animate the globe.
 
-<div class='ui raise segment'>
+<div class='ui raised segment'>
 <div class='ui red ribbon label'>JavaScript</div>
 
 ```javascript
@@ -97,7 +98,7 @@ planet.onDraw(function() {
 
 Calls the function with the current canvas context as a parameter, wrapping the function call in `context.save()` and `context.restore()`. Use this function any time you're going to modify the context to ensure it gets put back to the way it was.
 
-<div class='ui raise segment'>
+<div class='ui raised segment'>
 <div class='ui red ribbon label'>JavaScript</div>
 
 ```javascript
@@ -123,7 +124,7 @@ Calling `draw` will perform the following operations:
 3. Run each registered `onInit` hook in the order it was registered (note that `onInit` calls made by plugins will not be made until step 1, after `draw` has been called).
 4. Start the animation loop, each tick clearing the canvas and calling any registered `onDraw` hooks in order.
 
-<div class='ui raise segment'>
+<div class='ui raised segment'>
 <div class='ui blue ribbon label'>HTML</div>
 
 ```html

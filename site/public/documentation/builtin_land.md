@@ -14,7 +14,7 @@ Valid keys for `config` are:
 * `stroke`: the `strokeStyle` to use for the context; defaults to no value, resulting in no stroke around the landmasses
 * `lineWidth` the `lineWidth` to set on the context; only effective if `stroke` is set. Defaults to no value, resulting in no change to the context's `lineWidth`
 
-<div class='ui raise segment'>
+<div class='ui raised segment'>
 <div class='ui red ribbon label'>JavaScript</div>
 
 ```javascript
@@ -26,4 +26,5 @@ planetaryjs.plugins.land({
 
 See also:
 
+* [Earth Plugin](/documentation/builtin_earth.html)
 * [TopoJSON Plugin](/documentation/builtin_topojson.html)

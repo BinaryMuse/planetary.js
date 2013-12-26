@@ -21,7 +21,7 @@ Once you've [downloaded Planetary.js](/download/), you can include it via a `scr
 ```
 </div>
 
-If you use the default `topojson` plugin (most people will), you'll also need to make sure `world-110m.json` (or some other TopoJSON data file) is available on your server. This file is also available from [the download page](/download/). See the [TopoJSON Plugin](/documentation/builtin_topojson.html) documentation for more information.
+If you use the default `topojson` plugin (most people will), you'll also need to make sure `world-110m.json` (or some other TopoJSON data file) is available on your server. This file is also available from [the download page](/download/). See the [TopoJSON Plugin documentation](/documentation/builtin_topojson.html) for more information.
 
 Core API
 --------
@@ -42,7 +42,7 @@ var planetary = planetaryjs.noConflict();
 
 Planetary.js uses a plugin architecture for all its functionality. Calling `planetaryjs.loadPlugin` will cause that plugin to be loaded in *all* planets created from this library. If you only want to use a plugin in some of your planets, use the `planet.loadPlugin` method (from the [Planet API](/documentation/planet.html)) instead.
 
-<div class='ui raise segment'>
+<div class='ui raised segment'>
 <div class='ui red ribbon label'>JavaScript</div>
 
 ```javascript
@@ -51,13 +51,13 @@ planetaryjs.loadPlugin(somePluginGenerator());
 ```
 </div>
 
-For more information on the plugin system and API, please see the [Plugins](/documentation/plugins.html) documentation.
+For more information on the plugin system and API, please see the [Plugins documentation](/documentation/plugins.html).
 
 **`planetaryjs.planet()`**
 
-The `planet` API call returns a new planet instance, which represents a single globe. It will be created with all the plugins registered with `planetaryjs.loadPlugin()` active. It has various methods for manipulating the globe and drawing it to a canvas. The [Planet API](/documentation/planet.html) covers these methods in considerably more detail.
+The `planet` API call returns a new planet instance, which represents a single globe. It will be created with all the plugins registered with `planetaryjs.loadPlugin` active. It has various methods for manipulating the globe and drawing it to a canvas. The [Planet API](/documentation/planet.html) covers these methods in considerably more detail.
 
-<div class='ui raise segment'>
+<div class='ui raised segment'>
 <div class='ui red ribbon label'>JavaScript</div>
 
 ```javascript

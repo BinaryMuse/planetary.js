@@ -15,7 +15,7 @@ Valid keys for `config` are:
 * `angle`: the maximum angle for the ping (it will grow to this size over the course of its TTL); defaults to `5`
 * `latitudeFirst`: reverse the order of the latitudinal and longitudinal coordinates passed to the `add` function (so that the latitudinal coordinate comes first); defaults to false. See the note on `add`, below, for more information.
 
-<div class='ui raise segment'>
+<div class='ui raised segment'>
 <div class='ui red ribbon label'>JavaScript</div>
 
 ```javascript
@@ -35,9 +35,11 @@ Add a new ping to the globe at the longitudinal and latitudinal coordinates spec
 
 Any values not set by `config` will default to the values specified in the plugin's configuration, if any were set.
 
-**Note that the longitudinal coordinate comes first, followed by the latitudinal coordinate, unless you pass `latitudeFirst` as an option to the plugin configuration function.** This corresponds to the conventions used by D3 (which Planetary.js is based on); for more information on the problem of axis ordering in software, see [this article at the GeoTools web site](http://docs.geotools.org/latest/userguide/library/referencing/order.html).
+<div class='ui red raised segment'>
+<i class='red icon warning'></i> **Note that the longitudinal coordinate comes first, followed by the latitudinal coordinate, unless you pass `latitudeFirst` as an option to the plugin configuration function.** This corresponds to the conventions used by D3 (which Planetary.js is based on); for more information on the problem of axis ordering in software, see [this article at the GeoTools web site](http://docs.geotools.org/latest/userguide/library/referencing/order.html).
+</div>
 
-<div class='ui raise segment'>
+<div class='ui raised segment'>
 <div class='ui red ribbon label'>JavaScript</div>
 
 ```javascript

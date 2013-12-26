@@ -14,7 +14,7 @@ Valid keys for `config` are:
 * `lineWidth` the `lineWidth` to set on the context; defaults to no value, and the context's `lineWidth` is not modified
 * `type`: valid options are `"internal"`, `"external"`, or `"both"`. `"internal"` draws borders between countries but not coastlines; `"external"` does the opposite. `"both"`, unsurprisingly, draws both. Defaults to `"internal"`.
 
-<div class='ui raise segment'>
+<div class='ui raised segment'>
 <div class='ui red ribbon label'>JavaScript</div>
 
 ```javascript
@@ -26,4 +26,5 @@ planetaryjs.plugins.borders({
 
 See also:
 
+* [Earth Plugin](/documentation/builtin_earth.html)
 * [TopoJSON Plugin](/documentation/builtin_topojson.html)

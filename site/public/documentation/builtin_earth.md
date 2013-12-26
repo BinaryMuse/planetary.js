@@ -15,7 +15,7 @@ Valid keys for `config` are:
 * `land`: options to pass to the `land` plugin
 * `borders`: options to pass to the `borders` plugin
 
-<div class='ui raise segment'>
+<div class='ui raised segment'>
 <div class='ui red ribbon label'>JavaScript</div>
 
 ```javascript

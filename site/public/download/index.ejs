@@ -3,7 +3,7 @@
 <%   return "https://github.com/BinaryMuse/planetary.js/releases/download/" + version + "/" + file; %>
 <% } %>
 
-<h1>Download Planetary.js</h1>
+<h1><i class='icon download disk'></i> Download Planetary.js</h1>
 
 <p>Download the core Planetary.js library and supporting files here.</p>
 
@@ -30,9 +30,17 @@
       ]
     </div>
     <div class='item'>
-      <i class='icon download'></i>
+      <i class='icon globe'></i>
       Earth TopoJSON data: [
       <a href='<%= dl(data.stable.latest.version, 'world-110m.json') %>'>minified</a>
+      ]
+    </div>
+    <div class='item'>
+      <i class='icon code'></i>
+      Source code [
+        <a href='https://github.com/BinaryMuse/planetary.js/archive/<%= data.stable.latest.version %>.zip'>.zip</a>
+        |
+        <a href='https://github.com/BinaryMuse/planetary.js/archive/<%= data.stable.latest.version %>.tar.gz'>.tar.gz</a>
       ]
     </div>
   </div>
@@ -65,9 +73,17 @@
       ]
     </div>
     <div class='item'>
-      <i class='icon download'></i>
+      <i class='icon globe'></i>
       Earth TopoJSON data: [
       <a href='<%= dl(data.unstable.latest.version, 'world-110m.json') %>'>minified</a>
+      ]
+    </div>
+    <div class='item'>
+      <i class='icon code'></i>
+      Source code [
+        <a href='https://github.com/BinaryMuse/planetary.js/archive/<%= data.unstable.latest.version %>.zip'>.zip</a>
+        |
+        <a href='https://github.com/BinaryMuse/planetary.js/archive/<%= data.unstable.latest.version %>.tar.gz'>.tar.gz</a>
       ]
     </div>
   </div>
