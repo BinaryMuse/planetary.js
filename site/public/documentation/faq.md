@@ -26,6 +26,14 @@ planet's `draw` method.
   <i class="globe icon"></i>
 </div>
 
+**Q:** Why can't I load the `world-110m.json` file with the TopoJSON plugin?
+
+**A:** After checking to make sure you've specified the path to the file in the plugin's configuration options, ensure that you're viewing your page over HTTP. Your browser won't be able to make the necessary Ajax request to load the file if you're just viewing the page from your filesystem.
+
+<div class="ui horizontal icon divider">
+  <i class="globe icon"></i>
+</div>
+
 **Q:** How do I manipulate my globe?
 
 **A:** The planet object has methods and properties for manipulating the globe; most notable is the `projection` property. See the [Planet API](/documentation/planet.html) for more information.
