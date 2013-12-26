@@ -91,12 +91,12 @@
 <ul>
 <li><code>onDragStart</code>, <code>onDragEnd</code>, <code>onDrag</code>, <code>afterDrag</code>: hooks to the <code>d3.behavior.drag</code> object&#39;s <code>dragstart</code>, <code>dragend</code>, and <code>drag</code> events; each defaults to a no-op. <code>onDrag</code> fires at the start of the <code>drag</code> event, <code>afterDrag</code> at the end. The planet instance is available as <code>this</code> inside the each of the functions.</li>
 </ul>
-<div class='ui raise segment'>
+<div class='ui raised segment'>
 <div class='ui red ribbon label'>JavaScript</div>
 
 <pre><code class="language-javascript">planetaryjs.plugins.drag({
   onDrag: function() {
-    console.log(&quot;The planet was dragged!&quot;, d3.event);
+    console.log(&quot;The planet was dragged!&quot;, this, d3.event);
   }
 });</code></pre>
 <p></div></p>

@@ -98,7 +98,7 @@
 &lt;body&gt;
 ...</code></pre>
 <p></div></p>
-<p>If you use the default <code>topojson</code> plugin (most people will), you&#39;ll also need to make sure <code>world-110m.json</code> (or some other TopoJSON data file) is available on your server. This file is also available from <a href="/download/">the download page</a>. See the <a href="/documentation/builtin_topojson.html">TopoJSON Plugin</a> documentation for more information.</p>
+<p>If you use the default <code>topojson</code> plugin (most people will), you&#39;ll also need to make sure <code>world-110m.json</code> (or some other TopoJSON data file) is available on your server. This file is also available from <a href="/download/">the download page</a>. See the <a href="/documentation/builtin_topojson.html">TopoJSON Plugin documentation</a> for more information.</p>
 <h2>Core API</h2>
 <p><strong><code>planetaryjs.noConflict()</code></strong></p>
 <p>In non-AMD and non-CommonJS environments, Planetary.js takes over the global <code>planetaryjs</code> namespace (in the browser, this means <code>window.planetaryjs</code>). If, for some reason, something else useful was there before you loaded Planetary.js, you can ask for it to be returned to that spot by calling <code>planetaryjs.noConflict()</code>. The Planetary.js library will be returned from the function, so you can continue to use the library.</p>
@@ -109,16 +109,16 @@
 <p></div></p>
 <p><strong><code>planetaryjs.loadPlugin(plugin)</code></strong></p>
 <p>Planetary.js uses a plugin architecture for all its functionality. Calling <code>planetaryjs.loadPlugin</code> will cause that plugin to be loaded in <em>all</em> planets created from this library. If you only want to use a plugin in some of your planets, use the <code>planet.loadPlugin</code> method (from the <a href="/documentation/planet.html">Planet API</a>) instead.</p>
-<div class='ui raise segment'>
+<div class='ui raised segment'>
 <div class='ui red ribbon label'>JavaScript</div>
 
 <pre><code class="language-javascript">planetaryjs.loadPlugin(somePlugin);
 planetaryjs.loadPlugin(somePluginGenerator());</code></pre>
 <p></div></p>
-<p>For more information on the plugin system and API, please see the <a href="/documentation/plugins.html">Plugins</a> documentation.</p>
+<p>For more information on the plugin system and API, please see the <a href="/documentation/plugins.html">Plugins documentation</a>.</p>
 <p><strong><code>planetaryjs.planet()</code></strong></p>
-<p>The <code>planet</code> API call returns a new planet instance, which represents a single globe. It will be created with all the plugins registered with <code>planetaryjs.loadPlugin()</code> active. It has various methods for manipulating the globe and drawing it to a canvas. The <a href="/documentation/planet.html">Planet API</a> covers these methods in considerably more detail.</p>
-<div class='ui raise segment'>
+<p>The <code>planet</code> API call returns a new planet instance, which represents a single globe. It will be created with all the plugins registered with <code>planetaryjs.loadPlugin</code> active. It has various methods for manipulating the globe and drawing it to a canvas. The <a href="/documentation/planet.html">Planet API</a> covers these methods in considerably more detail.</p>
+<div class='ui raised segment'>
 <div class='ui red ribbon label'>JavaScript</div>
 
 <pre><code class="language-javascript">var planet = planetaryjs.planet();</code></pre>

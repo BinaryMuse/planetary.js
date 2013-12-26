@@ -84,18 +84,21 @@
 
       <div class='twelve wide column'>
         <h1>Introduction</h1>
-<p>Planetary.js is a JavaScript library for building awesome interactive globes. It uses <a href="http://d3js.org/">D3</a> and <a href="https://github.com/mbostock/topojson">TopoJSON</a> to parse and render geographic data. Planetary.js is a plugin-based system; even the default functionality is implemented as plugins! This makes Planetary.js extremely flexible.</p>
+<p>Planetary.js is a JavaScript library for building awesome interactive globes. It uses <a href="http://d3js.org/">D3</a> and <a href="https://github.com/mbostock/topojson">TopoJSON</a> to parse and render geographic data. Planetary.js uses a plugin-based architecture; even the default functionality is implemented as plugins! This makes Planetary.js extremely flexible.</p>
 <p>The documentation is split up into several sections:</p>
 <ul>
-<li><a href="/documentation/core.html">Core API</a> describes the top-level Planetary.js API, including installing and configuring the library and creating new instances of planets.</li>
+<li><a href="/documentation/core.html">Core API</a> describes the top-level Planetary.js API, including installing and configuring the library and creating new planet instances.</li>
 <li><a href="/documentation/planet.html">Planet API</a> describes the API associated with a planet instance, including modifying its properties and accessing a special canvas context that allows you to draw on the globe.</li>
-<li><a href="/documentation/plugins.html">Plugins</a> describes the plugin architecture of Planetary.js and shows how you can easily build your own plugins to modify the behavior of Planetary.js</li>
+<li><a href="/documentation/plugins.html">Plugins</a> describes the plugin architecture of Planetary.js and shows how you can easily build your own plugins to modify the behavior of Planetary.js.</li>
 <li><a href="/documentation/builtin.html">Built-In Plugins</a> describes each of the built-in plugins in turn, including their public API and how to use them in a project.</li>
+<li><a href="/documentation/faq.html">FAQ</a> answers some common question and addresses a few easy-to-miss gotchas.</li>
+<li><a href="/documentation/help.html">Getting Help</a> describes what to do if you still need help after reading this documentation.</li>
 </ul>
 <h2>Quick Start</h2>
-<p>If you want to get up-and-running quickly, or like to experiment and figure things out, you can use this HTML and JavaScript to get a quick, simple globe working quickly.</p>
+<p>If you want to get up-and-running quickly, or like to experiment and figure things out, you can use this HTML and JavaScript to get a very simple globe up and running.</p>
 <p>Note that you&#39;ll need to run this page from a web server of some kind so that Planetary.js can load the TopoJSON data via Ajax (Ajax requests don&#39;t work when viewing a page directly from the filesystem).</p>
-<div class='ui raise segment'>
+<p>Be sure to check out <a href="/examples/">the examples</a> as well!</p>
+<div class='ui raised segment'>
 <div class='ui blue ribbon label'>HTML</div>
 
 <pre><code class="language-html">&lt;html&gt;

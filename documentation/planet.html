@@ -84,28 +84,29 @@
 
       <div class='twelve wide column'>
         <h1>Planet API</h1>
-<p>A &quot;planet&quot; represents a single globe and its rendering instructions. It is created from the <code>planetaryjs.planet()</code> method; see the <a href="/documentation/core.html">Core API</a> documentation for more details.</p>
+<p>A &quot;planet&quot; represents a single globe and its rendering instructions. It is created from the <code>planetaryjs.planet</code> method; see the <a href="/documentation/core.html">Core API documentation</a> for more details.</p>
 <p><strong><code>planet.loadPlugin(plugin)</code></strong></p>
 <p>Planetary.js uses a plugin architecture for all its functionality. While you can load plugins at the global library level, Planetary.js also allows you to load plugins for specific planets. <strong>If a planet is drawn and no plugins have been loaded globally and no plugins have been loaded for the specific planet instance, it will use the default <code>earth</code> and <code>pings</code> plugins.</strong></p>
-<div class='ui raise segment'>
+<div class='ui raised segment'>
 <div class='ui red ribbon label'>JavaScript</div>
 
 <pre><code class="language-javascript">planet.loadPlugin(somePlugin);
 planet.loadPlugin(somePluginGenerator());</code></pre>
 <p></div></p>
-<p>For more information on the plugin system and API, please see the <a href="/documentation/plugins.html">Plugins</a> documentation.</p>
+<p>For more information on the plugin system and API, please see the <a href="/documentation/plugins.html">Plugins documentation</a>.</p>
 <p><strong><code>planet.projection</code></strong></p>
 <p>The core of a planet&#39;s data model is an <a href="https://github.com/mbostock/d3/wiki/Geo-Projections"><code>d3.geo.projection</code></a> (specifically, an orthographic projection), which is exposed by a planet by <code>planet.projection</code>. You can use this object to control various aspects of the planet. The D3 documentation covers the methods in considerable detail, so <a href="https://github.com/mbostock/d3/wiki/Geo-Projections">be sure to check it out</a>; many of the examples on this site also use the projection object to operate.</p>
-<div class='ui raise segment'>
+<div class='ui raised segment'>
 <div class='ui red ribbon label'>JavaScript</div>
 
 <pre><code class="language-javascript">planet.projection
   .scale(width / 2)
+  .translate([width / 2, height / 2])
   .rotate([60, -10, 0]);</code></pre>
 <p></div></p>
 <p><strong><code>planet.path</code></strong></p>
 <p><code>planet.path</code> is a <a href="https://github.com/mbostock/d3/wiki/Geo-Paths"><code>d3.geo.path</code></a> which uses the planet&#39;s internal projection to generate path data for geographical features. Its <code>context</code> method is commonly used by internal plugins to take a canvas context and return a path generator that can be used to draw on the globe.</p>
-<div class='ui raise segment'>
+<div class='ui raised segment'>
 <div class='ui red ribbon label'>JavaScript</div>
 
 <pre><code class="language-javascript">canvasContext.beginPath();
@@ -117,9 +118,9 @@ canvasContext.fill();</code></pre>
 <p><strong><code>planet.canvas</code> and <code>planet.context</code></strong></p>
 <p>Once you call <code>draw</code> on a planet instance, Planetary.js will set the <code>canvas</code> and <code>context</code> properties to the canvas and its context, respectively.</p>
 <p><strong><code>planet.onInit( function([done]){} )</code></strong></p>
-<p>Registers a function to be called when the planet is initialized (which happens after a call to <code>draw</code> and after any loaded plugins have been initialized). This is mostly used by plugins to initialize themselves when the planet &quot;boots.&quot;</p>
+<p>Registers a function to be called when the planet is initialized (which happens after a call to <code>draw</code> and after any registered plugins have been loaded). This is mostly used by plugins to initialize themselves when the planet &quot;boots.&quot;</p>
 <p>If the provided callback function takes any parameters, it will be a &quot;done&quot; function that must be called once the initialization function finishes any asynchronous work before the planet will continue to initialize.</p>
-<div class='ui raise segment'>
+<div class='ui raised segment'>
 <div class='ui red ribbon label'>JavaScript</div>
 
 <pre><code class="language-javascript">planet.onInit(function() {
@@ -134,7 +135,7 @@ planet.onInit(function(done) {
 <p></div></p>
 <p><strong><code>planet.onDraw( function(){} )</code></strong></p>
 <p>Registers a function to be called each time the globe redraws itself. This is mostly used by plugins to draw plugin-specific data or otherwise animate the globe.</p>
-<div class='ui raise segment'>
+<div class='ui raised segment'>
 <div class='ui red ribbon label'>JavaScript</div>
 
 <pre><code class="language-javascript">planet.onDraw(function() {
@@ -146,7 +147,7 @@ planet.onInit(function(done) {
 <p></div></p>
 <p><strong><code>planet.withSavedContext( function(context){} )</code></strong></p>
 <p>Calls the function with the current canvas context as a parameter, wrapping the function call in <code>context.save()</code> and <code>context.restore()</code>. Use this function any time you&#39;re going to modify the context to ensure it gets put back to the way it was.</p>
-<div class='ui raise segment'>
+<div class='ui raised segment'>
 <div class='ui red ribbon label'>JavaScript</div>
 
 <pre><code class="language-javascript">planet.onDraw(function() {
@@ -167,7 +168,7 @@ planet.onInit(function(done) {
 <li>Run each registered <code>onInit</code> hook in the order it was registered (note that <code>onInit</code> calls made by plugins will not be made until step 1, after <code>draw</code> has been called).</li>
 <li>Start the animation loop, each tick clearing the canvas and calling any registered <code>onDraw</code> hooks in order.</li>
 </ol>
-<div class='ui raise segment'>
+<div class='ui raised segment'>
 <div class='ui blue ribbon label'>HTML</div>
 
 <pre><code class="language-html">&lt;canvas id=&#39;myCanvas&#39; width=&#39;123&#39; height=&#39;456&#39;&gt;&lt;/canvas&gt;</code></pre>

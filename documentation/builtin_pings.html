@@ -94,7 +94,7 @@
 <li><code>angle</code>: the maximum angle for the ping (it will grow to this size over the course of its TTL); defaults to <code>5</code></li>
 <li><code>latitudeFirst</code>: reverse the order of the latitudinal and longitudinal coordinates passed to the <code>add</code> function (so that the latitudinal coordinate comes first); defaults to false. See the note on <code>add</code>, below, for more information.</li>
 </ul>
-<div class='ui raise segment'>
+<div class='ui raised segment'>
 <div class='ui red ribbon label'>JavaScript</div>
 
 <pre><code class="language-javascript">planetaryjs.plugins.pings({
@@ -109,8 +109,11 @@
 <li><code>angle</code>: the maximum angle for the ping (it will grow to this size over the course of its TTL); defaults to <code>5</code></li>
 </ul>
 <p>Any values not set by <code>config</code> will default to the values specified in the plugin&#39;s configuration, if any were set.</p>
-<p><strong>Note that the longitudinal coordinate comes first, followed by the latitudinal coordinate, unless you pass <code>latitudeFirst</code> as an option to the plugin configuration function.</strong> This corresponds to the conventions used by D3 (which Planetary.js is based on); for more information on the problem of axis ordering in software, see <a href="http://docs.geotools.org/latest/userguide/library/referencing/order.html">this article at the GeoTools web site</a>.</p>
-<div class='ui raise segment'>
+<div class='ui red raised segment'>
+<i class='red icon warning'></i> <strong>Note that the longitudinal coordinate comes first, followed by the latitudinal coordinate, unless you pass <code>latitudeFirst</code> as an option to the plugin configuration function.</strong> This corresponds to the conventions used by D3 (which Planetary.js is based on); for more information on the problem of axis ordering in software, see <a href="http://docs.geotools.org/latest/userguide/library/referencing/order.html">this article at the GeoTools web site</a>.
+</div>
+
+<div class='ui raised segment'>
 <div class='ui red ribbon label'>JavaScript</div>
 
 <pre><code class="language-javascript">var colors = [&#39;red&#39;, &#39;yellow&#39;, &#39;white&#39;, &#39;orange&#39;, &#39;green&#39;, &#39;cyan&#39;, &#39;pink&#39;];

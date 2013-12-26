@@ -93,13 +93,13 @@
 <li><code>scaleExtent</code>: the value to use for the <code>d3.behavior.zoom</code> object&#39;s <code>scaleExtent</code> property, which defines how far in and out the planet can be zoomed; defaults to <code>[50, 2000]</code></li>
 <li><code>onZoomStart</code>, <code>onZoomEnd</code>, <code>onZoom</code>, <code>afterZoom</code>: hooks to the <code>d3.behavior.zoom</code> object&#39;s <code>zoomstart</code>, <code>zoomend</code>, and <code>zoom</code> events; each defaults to a no-op. <code>onZoom</code> fires at the start of the <code>zoom</code> event, <code>afterZoom</code> at the end. The planet instance is available as <code>this</code> inside the each of the functions.</li>
 </ul>
-<div class='ui raise segment'>
+<div class='ui raised segment'>
 <div class='ui red ribbon label'>JavaScript</div>
 
 <pre><code class="language-javascript">planetaryjs.plugins.zoom({
   scaleExtent: [200, 1000],
   onZoom: function() {
-    console.log(&quot;The planet was zoomed!&quot;, d3.event);
+    console.log(&quot;The planet was zoomed!&quot;, this, d3.event);
   }
 });</code></pre>
 <p></div></p>

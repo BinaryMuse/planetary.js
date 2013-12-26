@@ -90,18 +90,18 @@
 <p><strong><code>planetaryjs.plugins.topojson([config])</code></strong></p>
 <p>Valid keys for <code>config</code> are:</p>
 <ul>
-<li><code>world</code>: a JavaScript object representing TopoJSON data (not JSON data); defaults to no value, which will cause the plugin to load data from the <code>file</code> configuration option</li>
+<li><code>world</code>: a JavaScript object representing TopoJSON data (not a JSON string); defaults to no value, which will cause the plugin to load data from the <code>file</code> configuration option</li>
 <li><code>file</code>: the path to a TopoJSON data file to be loaded via Ajax; defaults to <code>&quot;world-110m.json&quot;</code>, which can be downloaded with the Planetary.js library from the <a href="/download/">download page</a>.</li>
 </ul>
 <p>If you plan on creating more than one planet from the same TopoJSON data, you can load the data once before loading the plugin and pass the parsed data to the plugin via the <code>world</code> property rather than letting the plugin load the data via Ajax each time a new planet is created.</p>
-<div class='ui raise segment'>
+<div class='ui raised segment'>
 <div class='ui red ribbon label'>JavaScript</div>
 
 <pre><code class="language-javascript">planetaryjs.plugins.topojson({
   file: &#39;/data/world-110m.json&#39;
 });</code></pre>
 <p></div></p>
-<div class='ui raise segment'>
+<div class='ui raised segment'>
 <div class='ui red ribbon label'>JavaScript</div>
 
 <pre><code class="language-javascript">d3.json(&#39;/data/world-110m.json&#39;, function(err, data) {
@@ -111,7 +111,10 @@
   // Create planets inside this callback
 });</code></pre>
 <p></div></p>
+<p><strong><code>planet.plugins.topojson.world</code></strong></p>
+<p>The plugin will publish the TopoJSON data to this key once it has been initialized by the plugin.</p>
 <ul>
+<li><a href="/documentation/builtin_earth.html">Earth Plugin</a></li>
 <li><a href="/documentation/builtin_land.html">Land Plugin</a></li>
 <li><a href="/documentation/builtin_borders.html">Borders Plugin</a></li>
 </ul>
