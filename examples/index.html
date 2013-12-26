@@ -42,35 +42,38 @@
 
 <p>Sometimes you just need to see some code to get an idea started; here are a few examples of what you can build with Planetary.js.</p>
 
-<div class='ui three connected items examples'>
-  <div class='row'>
-    <a class='item' href='/examples/basic.html'>
-      <div class='content'>
-        <div class='name'>Basic Globe</div>
-        <p class='description'>It doesn't get any simpler than this:
-          just a static globe using built-in plugins and nothing
-          up our sleeves!</p>
-      </div>
-    </a>
+<div class='ui segment example-segment'>
+  <div class='ui top attached purple label'>Level 1</div>
+  <div>
+    <a href='/examples/basic.html'><img src='/images/ex-basic.png' style='float: left; margin-right: 20px;'></a>
+    <a href='/examples/basic.html'><h2>Basic Globe</h2></a>
+    <p>It doesn't get any simpler than this: just a static globe, built using built-in plugins with nothing up our sleeves!</p>
+    <span class='ui teal horizontal label'>plugins: earth</span>
+    <span class='ui black horizontal label'>d3: projections</span>
+  </div>
+</div>
 
-    <a class='item' href='/examples/rotating.html'>
-      <div class='content'>
-        <div class='name'>Rotating Globe</div>
-        <p class='description'>If there's one thing that's better than
-          a globe, it's a globe that rotates. This is the demo from the
-          homepage of Planetaryjs.com, and so includes a custom
-          auto-rotation plugin and zoom/drag integration.</p>
-      </div>
-    </a>
+<div class='ui segment example-segment'>
+  <div class='ui top attached orange label'>Level 2</div>
+  <div>
+    <a href='/examples/rotating.html'><img src='/images/ex-rotating.png' style='float: left; margin-right: 20px;'></a>
+    <a href='/examples/rotating.html'><h2>Rotating Globe with Pings</h2></a>
+    <p>If there's one thing that's better than a globe, it's a globe that rotates. This is the demo from the homepage of Planetaryjs.com, and so includes a custom auto-rotation plugin and zoom/drag integration.</p>
+    <span class='ui teal horizontal label'>plugins: earth, pings, drag, zoom</span>
+    <span class='ui orange horizontal label'>custom plugins</span>
+    <span class='ui black horizontal label'>d3: projections</span>
+  </div>
+</div>
 
-    <a class='item' href='/examples/quake.html'>
-      <div class='content'>
-        <div class='name'>Earthquake Data</div>
-        <p class='description'>A visualization of 2013 seismic activity.
-          This demo shows the use of multiple custom plugins, D3
-          scales, fetching third party data, and DOM updates via D3.</p>
-      </div>
-    </a>
+<div class='ui segment example-segment'>
+  <div class='ui top attached red label'>Level 3</div>
+  <div>
+    <a href='/examples/quake.html'><img src='/images/ex-quake.png' style='float: left; margin-right: 20px;'></a>
+    <a href='/examples/quake.html'><h2>2013 Seismic Activity Visualization</h2></a>
+    <p>A visualization of 2013 seismic activity. This demo shows the use of multiple custom plugins, D3 scales, fetching third party data, and DOM updates via D3.</p>
+    <span class='ui teal horizontal label'>plugins: earth, pings, drag, zoom</span>
+    <span class='ui orange horizontal label'>custom plugins</span>
+    <span class='ui black horizontal label'>d3: projections, scales, selections, events, external data</span>
   </div>
 </div>
 
@@ -78,5 +81,15 @@
     </div>
   </div>
   <script type='text/javascript' src='/js/prism.js'></script>
+  <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-46705270-1', 'planetaryjs.com');
+  ga('send', 'pageview');
+</script>
+
 </body>
 </html>
