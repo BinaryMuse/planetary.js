@@ -1,17 +1,24 @@
 (function() {
   var globe = planetaryjs.planet();
+  // Load our custom `autorotate` plugin; see below.
+  globe.loadPlugin(autorotate(10));
   // The `earth` plugin draws the oceans and the land; it's actually
   // a combination of several separate built-in plugins.
+  //
+  // Note that we're loading a special TopoJSON file
+  // (world-110m-withlakes.json) so we can render lakes.
   globe.loadPlugin(planetaryjs.plugins.earth({
-    topojson: { file:   '/world-110m.json' },
+    topojson: { file:   '/world-110m-withlakes.json' },
     oceans:   { fill:   '#000080' },
     land:     { fill:   '#339966' },
     borders:  { stroke: '#008000' }
   }));
+  // Load our custom `lakes` plugin to draw lakes; see below.
+  globe.loadPlugin(lakes({
+    fill: '#000080'
+  }));
   // The `pings` plugin draws animated pings on the globe.
   globe.loadPlugin(planetaryjs.plugins.pings());
-  // Load our custom `autorotate` plugin; see below.
-  globe.loadPlugin(autorotate(10));
   // The `zoom` and `drag` plugins enable
   // manipulating the globe with the mouse.
   globe.loadPlugin(planetaryjs.plugins.zoom({
@@ -78,6 +85,32 @@
           planet.projection.rotate(rotation);
           lastTick = now;
         }
+      });
+    };
+  };
+
+  // This plugin takes lake data from the special
+  // TopoJSON we're loading and draws them on the map.
+  function lakes(options) {
+    options = options || {};
+    var lakes = null;
+
+    return function(planet) {
+      planet.onInit(function() {
+        // We can access the data loaded from the TopoJSON plugin
+        // on its namespace on `planet.plugins`. We're loading a custom
+        // TopoJSON file with an object called "ne_110m_lakes".
+        var world = planet.plugins.topojson.world;
+        lakes = topojson.feature(world, world.objects.ne_110m_lakes);
+      });
+
+      planet.onDraw(function() {
+        planet.withSavedContext(function(context) {
+          context.beginPath();
+          planet.path.context(context)(lakes);
+          context.fillStyle = options.fill || 'black';
+          context.fill();
+        });
       });
     };
   };

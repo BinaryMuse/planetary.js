@@ -3,10 +3,13 @@
   // The `earth` plugin draws the oceans and the land; it's actually
   // a combination of several separate built-in plugins.
   globe.loadPlugin(planetaryjs.plugins.earth({
-    topojson: { file:   'world-110m.json' },
+    topojson: { file:   'world-110m-withlakes.json' },
     oceans:   { fill:   '#000080' },
     land:     { fill:   '#339966' },
     borders:  { stroke: '#008000' }
+  }));
+  globe.loadPlugin(lakes({
+    fill: '#000080'
   }));
   // The `pings` plugin draws animated pings on the globe.
   globe.loadPlugin(planetaryjs.plugins.pings());
@@ -50,6 +53,27 @@
   }
   // Draw that globe!
   globe.draw(canvas);
+
+  function lakes(config) {
+    config = config || {};
+    return function(planet) {
+      var lakes = null;
+
+      planet.onInit(function() {
+        var world = planet.plugins.topojson.world;
+        lakes = topojson.feature(world, world.objects.ne_110m_lakes);
+      });
+
+      planet.onDraw(function() {
+        planet.withSavedContext(function(context) {
+          context.beginPath();
+          planet.path.context(context)(lakes);
+          context.fillStyle = config.fill || 'black';
+          context.fill();
+        });
+      });
+    };
+  };
 
   // This plugin will automatically rotate the globe around its vertical
   // axis a configured number of degrees every second.
