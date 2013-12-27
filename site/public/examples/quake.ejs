@@ -63,8 +63,8 @@
   // minimum magnitude in our data set is 2.5.
   var colors = d3.scale.pow()
     .exponent(3)
-    .domain([2, 6, 10])
-      .range(['yellow', 'orange', 'red']);
+    .domain([2, 4, 6, 8, 10])
+      .range(['white', 'yellow', 'orange', 'red', 'purple']);
   // Also create a scale for mapping magnitudes to ping angle sizes
   var angles = d3.scale.pow()
     .exponent(3)
