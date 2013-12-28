@@ -4,7 +4,9 @@
   "main": "dist/planetaryjs.min.js",
   "description": "Awesome interactive globes for the web",
   "homepage": "http://planetaryjs.com",
-  "authors": [ "Brandon Tilley <brandon@brandontilley.com>" ],
+  "authors": [
+    "Brandon Tilley <brandon@brandontilley.com>"
+  ],
   "license": "MIT",
   "ignore": [
     ".git",
@@ -21,8 +23,10 @@
     "topojson": "1.x"
   },
   "keywords": [
-    "globe", "globes",
-    "planet", "planets",
+    "globe",
+    "globes",
+    "planet",
+    "planets",
     "d3",
     "topojson"
   ]
