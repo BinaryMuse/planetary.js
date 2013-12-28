@@ -1,7 +1,7 @@
 Borders Plugin
 ==============
 
-The `borders` plugin renders the borders around (and between) countries. It uses TopoJSON data published to `planet.plugins.topojson.world` by the [TopoJSON plugin](/documentation/builtin_topojson.html).
+The `borders` plugin renders the borders around (and between) countries. It uses TopoJSON data published to `planet.plugins.topojson.world` by the [TopoJSON plugin](/documentation/builtin_topojson.html). It uses the feature at `objects.countries` in the TopoJSON object to calculate the borders.
 
 API
 ---

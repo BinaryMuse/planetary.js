@@ -1,7 +1,7 @@
 Land Plugin
 ===========
 
-The `land` plugin renders Earth's landmasses. It uses TopoJSON data published to `planet.plugins.topojson.world` by the [TopoJSON plugin](/documentation/builtin_topojson.html).
+The `land` plugin renders Earth's landmasses. It uses TopoJSON data published to `planet.plugins.topojson.world` by the [TopoJSON plugin](/documentation/builtin_topojson.html). It uses the feature at `objects.land` in the TopoJSON object.
 
 API
 ---
