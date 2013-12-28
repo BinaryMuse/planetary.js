@@ -4,6 +4,7 @@ var concat = require('gulp-concat');
 var rename = require('gulp-rename');
 var header = require('gulp-header');
 var jshint = require('gulp-jshint');
+var replace = require('gulp-replace');
 var metadata = require('./package.json');
 
 var shortHeader = "/*! Planetary.js {{version}} | (c) 2013 Brandon Tilley | Released under MIT License */"
@@ -23,7 +24,7 @@ function build(source, name, headerText, minify) {
   var js = source.pipe(concat(name));
   if (minify) { js = js.pipe(uglify()); }
   js = js.pipe(header(headerText, { version: metadata.version }));
-  js.pipe(gulp.dest('./dist'));
+  js.pipe(replace("\r\n", "\n")).pipe(gulp.dest('./dist'));
 }
 
 gulp.task('jshint', function() {
