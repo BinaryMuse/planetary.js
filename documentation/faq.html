@@ -116,7 +116,44 @@ planet&#39;s <code>draw</code> method.</p>
 </div>
 
 <p><strong>Q:</strong> I&#39;m getting &quot;Cannot read property &#39;geo&#39; of undefined&quot; or &quot;Cannot call method &#39;feature&#39; of undefined.&quot;</p>
-<p><strong>A:</strong> Ensure you&#39;re requiring the <a href="http://d3js.org/">D3</a> and <a href="https://github.com/mbostock/topojson">TopoJSON</a> libraries before Planetary.js</p>
+<p><strong>A:</strong> Ensure you&#39;re requiring the <a href="http://d3js.org/">D3</a> and <a href="https://github.com/mbostock/topojson">TopoJSON</a> libraries before Planetary.js.</p>
+<div class="ui horizontal icon divider">
+  <i class="globe icon"></i>
+</div>
+
+<p><strong>Q:</strong> Can I use Planetary.js with AMD or CommonJS?</p>
+<p><strong>A:</strong> Yes and no. Planetary.js uses a universal module definition, and so is compatible with AMD and CommonJS. However, neither D3 nor TopoJSON support AMD, and TopoJSON&#39;s CommonJS package (as installed with <a href="https://npmjs.org/">npm</a>) uses Node-specific functionality, so you can&#39;t, for instance, <a href="http://browserify.org/">browserify</a> it directly.</p>
+<h2>AMD</h2>
+<p>This example uses <a href="http://requirejs.org/">RequireJS</a>. Since neither D3 nor TopoJSON support AMD, we will use RequireJS&#39;s <a href="http://requirejs.org/docs/api.html#config-shim">shim configuration</a>.</p>
+<div class='ui raised segment'>
+<div class='ui blue ribbon label'>HTML</div>
+
+<pre><code class="language-html">&lt;body&gt;
+  &lt;canvas id=&#39;globe&#39; width=&#39;500&#39; height=&#39;500&#39;&gt;&lt;/canavs&gt;
+  &lt;script src=&#39;//cdnjs.cloudflare.com/ajax/libs/require.js/2.1.9/require.min.js&#39;
+    data-main=&#39;/app.js&#39;&gt;&lt;/script&gt;
+&lt;/body&gt;</code></pre>
+<div class='ui red ribbon label'>JavaScript</div>
+
+<pre><code class="language-javascript">requirejs.config({
+  // Tell RequireJS to use `window.d3` and `window.topojson`
+  // for those libraries, respectively
+  shim: {
+    d3: { exports: &#39;d3&#39; },
+    topojson: { exports: &#39;topojson&#39; }
+  },
+  paths: {
+    &#39;d3&#39;: &#39;path/to/d3.v3.min&#39;,
+    &#39;topojson&#39;: &#39;path/to/topojson.v1.min&#39;
+  }
+});
+
+requirejs([&#39;planetaryjs&#39;], function(planetaryjs) {
+  // Use Planetary.js here
+});</code></pre>
+<p></div></p>
+<h2>CommonJS</h2>
+<p>To use Planetary.js with a tool like Browserify, you will need to create a shim for TopoJSON (D3 includes a Browserify-compatible script). Take a look at <a href="https://github.com/thlorenz/browserify-shim">browserify-shim</a> for more information.</p>
 
       </div>
     </div>
