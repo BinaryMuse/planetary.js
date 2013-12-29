@@ -44,7 +44,7 @@
     var lng = Math.random() * 360 - 180;
     var color = colors[Math.floor(Math.random() * colors.length)];
     globe.plugins.pings.add(lng, lat, { color: color, ttl: 2000, angle: Math.random() * 10 });
-  }, 250);
+  }, 150);
 
   var canvas = document.getElementById('rotatingGlobe');
   // Special code to handle high-density displays (e.g. retina, some phones)
