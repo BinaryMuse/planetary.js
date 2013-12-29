@@ -44,4 +44,54 @@ planet's `draw` method.
 
 **Q:** I'm getting "Cannot read property 'geo' of undefined" or "Cannot call method 'feature' of undefined."
 
-**A:** Ensure you're requiring the [D3](http://d3js.org/) and [TopoJSON](https://github.com/mbostock/topojson) libraries before Planetary.js
+**A:** Ensure you're requiring the [D3](http://d3js.org/) and [TopoJSON](https://github.com/mbostock/topojson) libraries before Planetary.js.
+
+<div class="ui horizontal icon divider">
+  <i class="globe icon"></i>
+</div>
+
+**Q:** Can I use Planetary.js with AMD or CommonJS?
+
+**A:** Yes and no. Planetary.js uses a universal module definition, and so is compatible with AMD and CommonJS. However, neither D3 nor TopoJSON support AMD, and TopoJSON's CommonJS package (as installed with [npm](https://npmjs.org/)) uses Node-specific functionality, so you can't, for instance, [browserify](http://browserify.org/) it directly.
+
+## AMD
+
+This example uses [RequireJS](http://requirejs.org/). Since neither D3 nor TopoJSON support AMD, we will use RequireJS's [shim configuration](http://requirejs.org/docs/api.html#config-shim).
+
+<div class='ui raised segment'>
+<div class='ui blue ribbon label'>HTML</div>
+
+```html
+<body>
+  <canvas id='globe' width='500' height='500'></canavs>
+  <script src='//cdnjs.cloudflare.com/ajax/libs/require.js/2.1.9/require.min.js'
+    data-main='/app.js'></script>
+</body>
+```
+
+<div class='ui red ribbon label'>JavaScript</div>
+
+```javascript
+requirejs.config({
+  // Tell RequireJS to use `window.d3` and `window.topojson`
+  // for those libraries, respectively
+  shim: {
+    d3: { exports: 'd3' },
+    topojson: { exports: 'topojson' }
+  },
+  paths: {
+    'd3': 'path/to/d3.v3.min',
+    'topojson': 'path/to/topojson.v1.min'
+  }
+});
+
+requirejs(['planetaryjs'], function(planetaryjs) {
+  // Use Planetary.js here
+});
+
+```
+</div>
+
+## CommonJS
+
+To use Planetary.js with a tool like Browserify, you will need to create a shim for TopoJSON (D3 includes a Browserify-compatible script). Take a look at [browserify-shim](https://github.com/thlorenz/browserify-shim) for more information.
