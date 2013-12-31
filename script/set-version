@@ -5,7 +5,6 @@ var spawn = require('child_process').spawn;
 
 var type    = process.argv[2];
 var version = process.argv[3];
-var name    = process.argv[4]
 
 if ("stable" !== type && "unstable" !== type) {
   console.log("You must specify 'stable' or 'unstable' version type.");
@@ -30,7 +29,6 @@ bower.version = version;
 
 site[type].latest = site[type].latest || {};
 site[type].latest.version = "v" + version;
-if (name) site[type].latest.name = name;
 
 fs.writeFileSync('package.json', JSON.stringify(package, null, '  ') + "\n");
 fs.writeFileSync('bower.json', JSON.stringify(bower, null, '  ') + "\n");
