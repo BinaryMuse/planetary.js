@@ -1,6 +1,8 @@
 {
   "stable": {
-    "latest": null
+    "latest": {
+      "version": "v1.0.0"
+    }
   },
   "unstable": {
     "latest": {
