@@ -191,16 +191,20 @@
   // Plugin to resize the canvas to fill the window and to
   // automatically center the planet when the window size changes
   function autocenter(options) {
+    options = options || {};
     var needsCentering = false;
+    var globe = null;
+
     var resize = function() {
       var width  = window.innerWidth + (options.extraWidth || 0);
       var height = window.innerHeight + (options.extraHeight || 0);
-      planet.canvas.width = width;
-      planet.canvas.height = height;
-      planet.projection.translate([width / 2, height / 2]);
+      globe.canvas.width = width;
+      globe.canvas.height = height;
+      globe.projection.translate([width / 2, height / 2]);
     };
 
     return function(planet) {
+      globe = planet;
       planet.onInit(function() {
         needsCentering = true;
         d3.select(window).on('resize', function() {
@@ -217,6 +221,7 @@
   // Plugin to automatically scale the planet's projection based
   // on the window size when the planet is initialized
   function autoscale(options) {
+    options = options || {};
     return function(planet) {
       planet.onInit(function() {
         var width  = window.innerWidth + (options.extraWidth || 0);
