@@ -1,28 +1,6 @@
 Core API
 ========
 
-Installation
-------------
-
-Once you've [downloaded Planetary.js](/download/), you can include it via a `script` tag on your page *after* the inclusion of D3 and TopoJSON. This example uses the CDN URLs for those libraries:
-
-<div class='ui raised segment'>
-<div class='ui blue ribbon label'>HTML</div>
-
-```html
-<html>
-<head>
-  <script type='text/javascript' src='http://d3js.org/d3.v3.min.js'></script>
-  <script type='text/javascript' src='http://d3js.org/topojson.v1.min.js'></script>
-  <script type='text/javascript' src='path/to/planetaryjs.min.js'></script>
-</head>
-<body>
-...
-```
-</div>
-
-If you use the default `topojson` plugin (most people will), you'll also need to make sure `world-110m.json` (or some other TopoJSON data file) is available on your server. This file is also available from [the download page](/download/). See the [TopoJSON Plugin documentation](/documentation/builtin_topojson.html) for more information.
-
 Core API
 --------
 

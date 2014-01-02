@@ -15,7 +15,7 @@ The documentation is split up into several sections:
 Quick Start
 -----------
 
-If you want to get up-and-running quickly, or like to experiment and figure things out, you can use this HTML and JavaScript to get a very simple globe up and running.
+If you want to get up-and-running quickly, or like to experiment and figure things out, you can use this HTML and JavaScript to get a very simple globe up and running (once you've [installed Planetary.js](/documentation/installation.html)).
 
 Note that you'll need to run this page from a web server of some kind so that Planetary.js can load the TopoJSON data via Ajax (Ajax requests don't work when viewing a page directly from the filesystem).
 
