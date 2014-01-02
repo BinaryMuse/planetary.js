@@ -45,7 +45,7 @@
             Introduction
             <i class='icon home'></i>
           </a>
-          <a class='purple item ' href='/documentation/installation.html'>
+          <a class='purple item active' href='/documentation/installation.html'>
             Installation
             <i class='icon download'></i>
           </a>
@@ -69,7 +69,7 @@
             <div class='menu'>
               <a class='item ' href='/documentation/builtin_earth.html'>Earth</a>
               <a class='item ' href='/documentation/builtin_topojson.html'>TopoJSON</a>
-              <a class='item active' href='/documentation/builtin_oceans.html'>Oceans</a>
+              <a class='item ' href='/documentation/builtin_oceans.html'>Oceans</a>
               <a class='item ' href='/documentation/builtin_land.html'>Land</a>
               <a class='item ' href='/documentation/builtin_borders.html'>Borders</a>
               <a class='item ' href='/documentation/builtin_pings.html'>Pings</a>
@@ -89,25 +89,71 @@
       </div>
 
       <div class='twelve wide column'>
-        <h1>Oceans Plugin</h1>
-<p>The <code>oceans</code> plugin simply renders the main shape of the globe, filling it in with a solid color.</p>
-<h2>API</h2>
-<p><strong><code>planetaryjs.plugins.oceans([config])</code></strong></p>
-<p>Valid keys for <code>config</code> are:</p>
-<ul>
-<li><code>fill</code>: the <code>fillStyle</code> to use for the globe; defaults to <code>&quot;black&quot;</code></li>
-</ul>
+        <h1>Installation</h1>
+<p>Once you&#39;ve <a href="/download/">downloaded Planetary.js</a>, you can include it via a <code>script</code> tag on your page <em>after</em> the inclusion of D3 and TopoJSON. This example uses the CDN URLs for those libraries:</p>
+<div class='ui raised segment'>
+<div class='ui blue ribbon label'>HTML</div>
+
+<pre><code class="language-html">&lt;html&gt;
+&lt;head&gt;
+  &lt;script type=&#39;text/javascript&#39; src=&#39;http://d3js.org/d3.v3.min.js&#39;&gt;&lt;/script&gt;
+  &lt;script type=&#39;text/javascript&#39; src=&#39;http://d3js.org/topojson.v1.min.js&#39;&gt;&lt;/script&gt;
+  &lt;script type=&#39;text/javascript&#39; src=&#39;path/to/planetaryjs.min.js&#39;&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+...</code></pre>
+<p></div></p>
+<p>If you use the default <code>topojson</code> plugin (most people will), you&#39;ll also need to make sure <code>world-110m.json</code> (or some other TopoJSON data file) is available on your server. This file is also available from <a href="/download/">the download page</a>. See the <a href="/documentation/builtin_topojson.html">TopoJSON Plugin documentation</a> for more information.</p>
+<p>Planetary.js also supports installation via AMD and CommonJS loaders.</p>
+<h2>AMD</h2>
+<p>This example uses <a href="http://requirejs.org/">RequireJS</a>. Since neither D3 nor TopoJSON support AMD, we will use RequireJS&#39;s <a href="http://requirejs.org/docs/api.html#config-shim">shim configuration</a>.</p>
+<div class='ui raised segment'>
+<div class='ui blue ribbon label'>HTML</div>
+
+<pre><code class="language-html">&lt;body&gt;
+  &lt;canvas id=&#39;globe&#39; width=&#39;500&#39; height=&#39;500&#39;&gt;&lt;/canavs&gt;
+  &lt;script src=&#39;//cdnjs.cloudflare.com/ajax/libs/require.js/2.1.9/require.min.js&#39;
+    data-main=&#39;/app.js&#39;&gt;&lt;/script&gt;
+&lt;/body&gt;</code></pre>
+<div class='ui red ribbon label'>JavaScript</div>
+
+<pre><code class="language-javascript">requirejs.config({
+  // Tell RequireJS to use `window.d3` and `window.topojson`
+  // for those libraries, respectively
+  shim: {
+    d3: { exports: &#39;d3&#39; },
+    topojson: { exports: &#39;topojson&#39; }
+  },
+  paths: {
+    &#39;d3&#39;: &#39;path/to/d3.v3.min&#39;,
+    &#39;topojson&#39;: &#39;path/to/topojson.v1.min&#39;
+  }
+});
+
+requirejs([&#39;planetaryjs&#39;], function(planetaryjs) {
+  // Use Planetary.js here
+});</code></pre>
+<p></div></p>
+<h2>CommonJS</h2>
+<div class='ui red raised segment'>
+There is <a href="https://github.com/mbostock/topojson/pull/129">a pull request</a> open on the TopoJSON project to make this process more intuitive; these instructions will be updated based on its acceptance.
+</div>
+
+<p>First, install <code>browserify</code> and <code>brfs</code> from npm (as well as <code>planetary.js</code>, if you haven&#39;t already). Then, create your application (here referred to as <code>app.js</code>) and bundle it with browserify, running the dependencies through brfs.</p>
 <div class='ui raised segment'>
 <div class='ui red ribbon label'>JavaScript</div>
 
-<pre><code class="language-javascript">planetaryjs.plugins.oceans({
-  fill: &#39;#000080&#39;
-});</code></pre>
+<pre><code class="language-javascript">var planetaryjs = require(&#39;planetary.js&#39;);
+
+var planet = planetaryjs.planet();
+var canvas = document.getElementById(&#39;canvas&#39;);
+planet.draw(canvas);</code></pre>
+<div class='ui purple ribbon label'>Shell</div>
+
+<pre><code class="language-shell">$ npm install browserify brfs
+$ ./node_modules/.bin/browserify --g brfs app.js &gt; bundle.js</code></pre>
 <p></div></p>
-<p>See also:</p>
-<ul>
-<li><a href="/documentation/builtin_earth.html">Earth Plugin</a></li>
-</ul>
+<p><code>bundle.js</code> is now ready to use!</p>
 
       </div>
     </div>

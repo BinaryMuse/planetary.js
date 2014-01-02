@@ -45,6 +45,10 @@
             Introduction
             <i class='icon home'></i>
           </a>
+          <a class='purple item ' href='/documentation/installation.html'>
+            Installation
+            <i class='icon download'></i>
+          </a>
           <a class='blue item active' href='/documentation/core.html'>
             Core API
             <i class='icon setting'></i>
@@ -86,21 +90,6 @@
 
       <div class='twelve wide column'>
         <h1>Core API</h1>
-<h2>Installation</h2>
-<p>Once you&#39;ve <a href="/download/">downloaded Planetary.js</a>, you can include it via a <code>script</code> tag on your page <em>after</em> the inclusion of D3 and TopoJSON. This example uses the CDN URLs for those libraries:</p>
-<div class='ui raised segment'>
-<div class='ui blue ribbon label'>HTML</div>
-
-<pre><code class="language-html">&lt;html&gt;
-&lt;head&gt;
-  &lt;script type=&#39;text/javascript&#39; src=&#39;http://d3js.org/d3.v3.min.js&#39;&gt;&lt;/script&gt;
-  &lt;script type=&#39;text/javascript&#39; src=&#39;http://d3js.org/topojson.v1.min.js&#39;&gt;&lt;/script&gt;
-  &lt;script type=&#39;text/javascript&#39; src=&#39;path/to/planetaryjs.min.js&#39;&gt;&lt;/script&gt;
-&lt;/head&gt;
-&lt;body&gt;
-...</code></pre>
-<p></div></p>
-<p>If you use the default <code>topojson</code> plugin (most people will), you&#39;ll also need to make sure <code>world-110m.json</code> (or some other TopoJSON data file) is available on your server. This file is also available from <a href="/download/">the download page</a>. See the <a href="/documentation/builtin_topojson.html">TopoJSON Plugin documentation</a> for more information.</p>
 <h2>Core API</h2>
 <p><strong><code>planetaryjs.noConflict()</code></strong></p>
 <p>In non-AMD and non-CommonJS environments, Planetary.js takes over the global <code>planetaryjs</code> namespace (in the browser, this means <code>window.planetaryjs</code>). If, for some reason, something else useful was there before you loaded Planetary.js, you can ask for it to be returned to that spot by calling <code>planetaryjs.noConflict()</code>. The Planetary.js library will be returned from the function, so you can continue to use the library.</p>
