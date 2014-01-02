@@ -1,3 +1,8 @@
+v1.0.1 (2013/01/02)
+-------------------
+
+* Add D3 and TopoJSON as dependencies in `package.json`
+
 v1.0.0 (2013/12/31)
 -------------------
 
