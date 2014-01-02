@@ -64,6 +64,10 @@ requirejs(['planetaryjs'], function(planetaryjs) {
 CommonJS
 --------
 
+<div class='ui red raised segment'>
+There is [a pull request](https://github.com/mbostock/topojson/pull/129) open on the TopoJSON project to make this process more intuitive; these instructions will be updated based on its acceptance.
+</div>
+
 First, install `browserify` and `brfs` from npm (as well as `planetary.js`, if you haven't already). Then, create your application (here referred to as `app.js`) and bundle it with browserify, running the dependencies through brfs.
 
 <div class='ui raised segment'>
