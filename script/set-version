@@ -36,4 +36,4 @@ fs.writeFileSync('site/public/download/_data.json', JSON.stringify(site, null, '
 
 spawn('npm', ['run', 'build']);
 
-console.log("Tasks:\n\n - Update CHANGELOG.md\n - Regenerate site");
+console.log("Tasks:\n\n - Update CHANGELOG.md\n - Regenerate site\n - Create release on GH");
