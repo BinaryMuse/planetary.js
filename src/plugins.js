@@ -45,14 +45,14 @@
 
       planet.onDraw(function() {
         planet.withSavedContext(function(context) {
-          context.beginPath();
-          // nice land shadow
+          context.beginPath();                                    
+          planet.path.context(context)(land);
+
           if (config.shadow) {
             context.shadowOffsetX = config.shadow.shadowOffsetX || 1;
             context.shadowOffsetY = config.shadow.shadowOffsetY || 1;
             context.shadowColor = config.shadow.shadowColor || 'white';
-          }                              
-          planet.path.context(context)(land);
+          }
 
           if (config.fill !== false) {
             context.fillStyle = config.fill || 'white';
