@@ -1,3 +1,5 @@
+* Update version dependencies for D3 and TopoJSON
+
 v1.0.1 (2013/01/02)
 -------------------
 

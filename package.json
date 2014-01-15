@@ -29,7 +29,7 @@
     "gulp-replace": "~0.2.0"
   },
   "dependencies": {
-    "topojson": "~1.4.5",
-    "d3": "~3.3.13"
+    "topojson": ">=1.4.6",
+    "d3": ">=3.3.13"
   }
 }
