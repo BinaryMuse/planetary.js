@@ -136,11 +136,7 @@ requirejs([&#39;planetaryjs&#39;], function(planetaryjs) {
 });</code></pre>
 <p></div></p>
 <h2>CommonJS</h2>
-<div class='ui red raised segment'>
-There is <a href="https://github.com/mbostock/topojson/pull/129">a pull request</a> open on the TopoJSON project to make this process more intuitive; these instructions will be updated based on its acceptance.
-</div>
-
-<p>First, install <code>browserify</code> and <code>brfs</code> from npm (as well as <code>planetary.js</code>, if you haven&#39;t already). Then, create your application (here referred to as <code>app.js</code>) and bundle it with browserify, running the dependencies through brfs.</p>
+<p>First, install <code>browserify</code> from npm (as well as <code>planetary.js</code> v1.0.2+, if you haven&#39;t already). Then, create your application (here referred to as <code>app.js</code>) and bundle it with browserify.</p>
 <div class='ui raised segment'>
 <div class='ui red ribbon label'>JavaScript</div>
 
@@ -151,10 +147,15 @@ var canvas = document.getElementById(&#39;canvas&#39;);
 planet.draw(canvas);</code></pre>
 <div class='ui purple ribbon label'>Shell</div>
 
-<pre><code class="language-shell">$ npm install browserify brfs
-$ ./node_modules/.bin/browserify --g brfs app.js &gt; bundle.js</code></pre>
+<pre><code class="language-shell">$ npm install browserify
+$ ./node_modules/.bin/browserify app.js &gt; bundle.js</code></pre>
 <p></div></p>
-<p><code>bundle.js</code> is now ready to use!</p>
+<p><code>bundle.js</code> is now ready to use! You may need to set the <code>charset</code> option on your script tag:</p>
+<div class='ui raised segment'>
+<div class='ui blue ribbon label'>HTML</div>
+
+<pre><code class="language-html">&lt;script type=&#39;text/javascript&#39; src=&#39;bundle.js&#39; charset=&#39;utf-8&#39;&gt;&lt;/script&gt;</code></pre>
+<p></div></p>
 
       </div>
     </div>
