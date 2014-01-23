@@ -1,8 +1,8 @@
-/*! Planetary.js v1.0.2
+/*! Planetary.js v1.0.3
  *  Copyright (c) 2013 Brandon Tilley
  *
  *  Released under the MIT license
- *  Date: 2014-01-16T05:32:02.925Z
+ *  Date: 2014-01-23T04:43:43.546Z
  */
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -134,8 +134,7 @@
       };
 
       planet.projection = d3.geo.orthographic()
-        .clipAngle(90)
-        .precision(0);
+        .clipAngle(90);
       planet.path = d3.geo.path().projection(planet.projection);
 
       return planet;

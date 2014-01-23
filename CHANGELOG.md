@@ -1,3 +1,8 @@
+v1.0.3 (2014/01/23)
+-------------------
+
+* Don't disable adaptive resampling on the projection
+
 v1.0.2 (2014/01/16)
 -------------------
 
