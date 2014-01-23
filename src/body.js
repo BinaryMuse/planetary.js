@@ -117,8 +117,7 @@
       };
 
       planet.projection = d3.geo.orthographic()
-        .clipAngle(90)
-        .precision(0);
+        .clipAngle(90);
       planet.path = d3.geo.path().projection(planet.projection);
 
       return planet;
