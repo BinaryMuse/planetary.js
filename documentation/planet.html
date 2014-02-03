@@ -152,6 +152,19 @@ planet.onInit(function(done) {
   planet.projection.rotate(rotation);
 });</code></pre>
 <p></div></p>
+<p><strong><code>planet.onStop( function(){} )</code></strong></p>
+<p>Registers a function to be called when the planet is stopped with the <code>stop</code> method. This can be used to clean up timers and remove references to internal planet properties and plugins, if necessary, so that it can be property garbage collected.</p>
+<div class='ui raised segment'>
+<div class='ui red ribbon label'>JavaScript</div>
+
+<pre><code class="language-javascript">var interval = setInterval(function() {
+  addRandomPing(planet); // uses `planet.plugins.pings`
+}, 150);
+
+planet.onStop(function() {
+  clearInterval(interval);
+});</code></pre>
+<p></div></p>
 <p><strong><code>planet.withSavedContext( function(context){} )</code></strong></p>
 <p>Calls the function with the current canvas context as a parameter, wrapping the function call in <code>context.save()</code> and <code>context.restore()</code>. Use this function any time you&#39;re going to modify the context to ensure it gets put back to the way it was.</p>
 <div class='ui raised segment'>
@@ -170,7 +183,7 @@ planet.onInit(function(done) {
 <p>Begins drawing the globe onto the given canvas. <code>canvas</code> should be a raw DOM element (e.g. as returned by <code>document.getElementById</code>). Specifically, if it is wrapped by D3 or jQuery, you need to unwrap it with something like <code>wrappedCanvas[0]</code>.</p>
 <p>Calling <code>draw</code> will perform the following operations:</p>
 <ol>
-<li>Initialize each loaded plugin by calling the plugin function.</li>
+<li>Initialize each loaded plugin by calling the plugin function (note: this only happens the first time you call <code>draw</code>).</li>
 <li>Set <code>planet.canvas</code> and <code>planet.context</code> to the canvas and the canvas&#39; context, respectively.</li>
 <li>Run each registered <code>onInit</code> hook in the order it was registered (note that <code>onInit</code> calls made by plugins will not be made until step 1, after <code>draw</code> has been called).</li>
 <li>Start the animation loop, each tick clearing the canvas and calling any registered <code>onDraw</code> hooks in order.</li>
@@ -183,6 +196,15 @@ planet.onInit(function(done) {
 
 <pre><code class="language-javascript">var canvas = document.getElementById(&#39;myCanvas&#39;);
 planet.draw(canvas);</code></pre>
+<p></div></p>
+<p><strong><code>planet.stop()</code></strong></p>
+<p>Stop drawing the planet to the canvas. This disables the internal draw loop. You can register functions to call when the planet is stopped using the <code>onStop</code> method; if you don&#39;t plan on reusing the planet, be sure to clean up timers and references to internal properties, if necessary, so that it can be garbage collected.</p>
+<p>You can draw the planet to a new (or the same) canvas using the <code>draw</code> method as normal. All your plugins&#39; <code>onInit</code> functions will fire, although the plugin function itself will not be called again.</p>
+<p>Keep in mind that, since the internal draw loop is stopped, your plugins&#39; <code>onDraw</code> functions are not being called. If you have timers or other mechanisms that continually push data into a data structure that an <code>onDraw</code> method cleans up, you should disable or pause it.</p>
+<div class='ui raised segment'>
+<div class='ui red ribbon label'>JavaScript</div>
+
+<pre><code class="language-javascript">planet.stop();</code></pre>
 <p></div></p>
 
       </div>
