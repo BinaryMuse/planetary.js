@@ -1,8 +1,8 @@
-/*! Planetary.js v1.0.3
+/*! Planetary.js v1.1.0
  *  Copyright (c) 2013 Brandon Tilley
  *
  *  Released under the MIT license
- *  Date: 2014-01-23T04:43:43.546Z
+ *  Date: 2014-02-03T08:15:07.064Z
  */
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
@@ -21,6 +21,10 @@
 
   var doDrawLoop = function(planet, canvas, hooks) {
     d3.timer(function() {
+      if (planet.stopped) {
+        return true;
+      }
+
       planet.context.clearRect(0, 0, canvas.width, canvas.height);
       for (var i = 0; i < hooks.onDraw.length; i++) {
         hooks.onDraw[i]();
@@ -76,11 +80,14 @@
   };
 
   var startDraw = function(planet, canvas, localPlugins, hooks) {
-    initPlugins(planet, localPlugins);
-
     planet.canvas = canvas;
     planet.context = canvas.getContext('2d');
 
+    if (planet.stopped !== true) {
+      initPlugins(planet, localPlugins);
+    }
+
+    planet.stopped = false;
     runOnInitHooks(planet, canvas, hooks);
   };
 
@@ -100,7 +107,8 @@
       var localPlugins = [];
       var hooks = {
         onInit: [],
-        onDraw: []
+        onDraw: [],
+        onStop: []
       };
 
       var planet = {
@@ -118,8 +126,19 @@
           hooks.onDraw.push(fn);
         },
 
+        onStop: function(fn) {
+          hooks.onStop.push(fn);
+        },
+
         loadPlugin: function(plugin) {
           localPlugins.push(plugin);
+        },
+
+        stop: function() {
+          planet.stopped = true;
+          for (var i = 0; i < hooks.onStop.length; i++) {
+            hooks.onStop[i](planet);
+          }
         },
 
         withSavedContext: function(fn) {
