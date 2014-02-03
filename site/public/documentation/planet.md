@@ -94,6 +94,24 @@ planet.onDraw(function() {
 ```
 </div>
 
+**`planet.onStop( function(){} )`**
+
+Registers a function to be called when the planet is stopped with the `stop` method. This can be used to clean up timers and remove references to internal planet properties and plugins, if necessary, so that it can be property garbage collected.
+
+<div class='ui raised segment'>
+<div class='ui red ribbon label'>JavaScript</div>
+
+```javascript
+var interval = setInterval(function() {
+  addRandomPing(planet); // uses `planet.plugins.pings`
+}, 150);
+
+planet.onStop(function() {
+  clearInterval(interval);
+});
+```
+</div>
+
 **`planet.withSavedContext( function(context){} )`**
 
 Calls the function with the current canvas context as a parameter, wrapping the function call in `context.save()` and `context.restore()`. Use this function any time you're going to modify the context to ensure it gets put back to the way it was.
@@ -119,7 +137,7 @@ Begins drawing the globe onto the given canvas. `canvas` should be a raw DOM ele
 
 Calling `draw` will perform the following operations:
 
-1. Initialize each loaded plugin by calling the plugin function.
+1. Initialize each loaded plugin by calling the plugin function (note: this only happens the first time you call `draw`).
 2. Set `planet.canvas` and `planet.context` to the canvas and the canvas' context, respectively.
 3. Run each registered `onInit` hook in the order it was registered (note that `onInit` calls made by plugins will not be made until step 1, after `draw` has been called).
 4. Start the animation loop, each tick clearing the canvas and calling any registered `onDraw` hooks in order.
@@ -136,5 +154,21 @@ Calling `draw` will perform the following operations:
 ```javascript
 var canvas = document.getElementById('myCanvas');
 planet.draw(canvas);
+```
+</div>
+
+**`planet.stop()`**
+
+Stop drawing the planet to the canvas. This disables the internal draw loop. You can register functions to call when the planet is stopped using the `onStop` method; if you don't plan on reusing the planet, be sure to clean up timers and references to internal properties, if necessary, so that it can be garbage collected.
+
+You can draw the planet to a new (or the same) canvas using the `draw` method as normal. All your plugins' `onInit` functions will fire, although the plugin function itself will not be called again.
+
+Keep in mind that, since the internal draw loop is stopped, your plugins' `onDraw` functions are not being called. If you have timers or other mechanisms that continually push data into a data structure that an `onDraw` method cleans up, you should disable or pause it.
+
+<div class='ui raised segment'>
+<div class='ui red ribbon label'>JavaScript</div>
+
+```javascript
+planet.stop();
 ```
 </div>
