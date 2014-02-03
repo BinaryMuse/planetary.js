@@ -1,3 +1,5 @@
+* Add `stop` method to Planet API
+
 v1.0.3 (2014/01/23)
 -------------------
 
