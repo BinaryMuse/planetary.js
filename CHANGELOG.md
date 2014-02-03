@@ -1,7 +1,10 @@
 v1.1.0 (2014/02/03)
 -------------------
 
-* Add `stop` method to Planet API
+**Core**
+
+* Add `stop` method
+* Add `onStop` hooks
 
 v1.0.3 (2014/01/23)
 -------------------
