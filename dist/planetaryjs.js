@@ -1,4 +1,4 @@
-/*! Planetary.js v1.1.0
+/*! Planetary.js v1.1.1
  *  Copyright (c) 2013 Brandon Tilley
  *
  *  Released under the MIT license
