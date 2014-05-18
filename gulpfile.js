@@ -7,14 +7,15 @@ var jshint = require('gulp-jshint');
 var replace = require('gulp-replace');
 var metadata = require('./package.json');
 
-var shortHeader = "/*! Planetary.js {{version}} | (c) 2013 Brandon Tilley | Released under MIT License */"
+var shortHeader = "/*! Planetary.js <%= version %> | (c) 2013 Brandon Tilley | Released under MIT License */\n"
 var fullHeader = [
-  "/*! Planetary.js v{{version}}",
+  "/*! Planetary.js v<%= version %>",
   " *  Copyright (c) 2013 Brandon Tilley",
   " *",
   " *  Released under the MIT license",
-  " *  Date: {{now}}",
-  " */"
+  " *  Date: <%= new Date().toISOString() %>",
+  " */",
+  ""
 ].join("\n");
 
 var fullSource = gulp.src(['./src/_umd_header.js', './src/body.js', './src/plugins.js', './src/_umd_footer.js']);
@@ -42,7 +43,4 @@ gulp.task('build', function() {
   gulp.src('./src/world-110m.json').pipe(gulp.dest('./dist'));
 });
 
-gulp.task('default', function() {
-  gulp.run('jshint');
-  gulp.run('build');
-});
+gulp.task('default', ['jshint', 'build']);
