@@ -157,6 +157,8 @@ planet.draw(canvas);
 ```
 </div>
 
+Once you've called `draw()` on a planet, you should not call it again unless you first call `stop()`.
+
 **`planet.stop()`**
 
 Stop drawing the planet to the canvas. This disables the internal draw loop. You can register functions to call when the planet is stopped using the `onStop` method; if you don't plan on reusing the planet, be sure to clean up timers and references to internal properties, if necessary, so that it can be garbage collected.
