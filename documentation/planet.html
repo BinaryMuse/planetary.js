@@ -197,6 +197,7 @@ planet.onStop(function() {
 <pre><code class="language-javascript">var canvas = document.getElementById(&#39;myCanvas&#39;);
 planet.draw(canvas);</code></pre>
 <p></div></p>
+<p>Once you&#39;ve called <code>draw()</code> on a planet, you should not call it again unless you first call <code>stop()</code>.</p>
 <p><strong><code>planet.stop()</code></strong></p>
 <p>Stop drawing the planet to the canvas. This disables the internal draw loop. You can register functions to call when the planet is stopped using the <code>onStop</code> method; if you don&#39;t plan on reusing the planet, be sure to clean up timers and references to internal properties, if necessary, so that it can be garbage collected.</p>
 <p>You can draw the planet to a new (or the same) canvas using the <code>draw</code> method as normal. All your plugins&#39; <code>onInit</code> functions will fire, although the plugin function itself will not be called again.</p>
