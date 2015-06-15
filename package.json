@@ -2,7 +2,7 @@
   "name": "planetary.js",
   "version": "1.1.1",
   "description": "Awesome interactive globes for the web",
-  "main": "index.js",
+  "main": "dist/planetaryjs",
   "scripts": {
     "build": "rm -r dist/ ; gulp && cp dist/planetaryjs.min.js site/public/js/lib",
     "jshint": "gulp jshint",
