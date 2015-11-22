@@ -1,8 +1,8 @@
-/*! Planetary.js v1.1.1
- *  Copyright (c) 2013 Brandon Tilley
+/*! Planetary.js v1.1.2
+ *  Copyright (c) 2013 Michelle Tilley
  *
  *  Released under the MIT license
- *  Date: 2014-05-18T17:34:29.246Z
+ *  Date: 2015-11-22T10:07:37.594Z
  */
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
