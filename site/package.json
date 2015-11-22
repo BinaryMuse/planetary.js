@@ -9,7 +9,7 @@
     "start": "harp server",
     "compile": "harp compile"
   },
-  "author": "Brandon Tilley <brandon@brandontilley.com>",
+  "author": "Michelle Tilley <michelle@michelletilley.net>",
   "license": "MIT",
   "private": true,
   "dependencies": {

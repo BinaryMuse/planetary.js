@@ -7,10 +7,10 @@ var jshint = require('gulp-jshint');
 var replace = require('gulp-replace');
 var metadata = require('./package.json');
 
-var shortHeader = "/*! Planetary.js <%= version %> | (c) 2013 Brandon Tilley | Released under MIT License */\n"
+var shortHeader = "/*! Planetary.js <%= version %> | (c) 2013 Michelle Tilley | Released under MIT License */\n"
 var fullHeader = [
   "/*! Planetary.js v<%= version %>",
-  " *  Copyright (c) 2013 Brandon Tilley",
+  " *  Copyright (c) 2013 Michelle Tilley",
   " *",
   " *  Released under the MIT license",
   " *  Date: <%= new Date().toISOString() %>",
